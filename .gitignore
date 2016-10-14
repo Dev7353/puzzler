@@ -9,6 +9,7 @@ bin/
 # Intellij
 .idea/
 target/
+.idea*/
 
 # Maven
 log/
@@ -21,7 +22,7 @@ pom.xml
 
 # sbt
 .cache
-.cache-main
+.cache-*
 .history
 .lib/
 .project
