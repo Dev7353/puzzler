@@ -22,11 +22,11 @@ This game is a single-player puzzle game where the user has to get from the star
 		* val allowedMoves = []
 	* Goal
 		* Has coordinates (set as val)
-	* Move
-		* up, down, right, left methods
-		* returns changed coordinates
-	* Level
-		* Contains all the other model data
+* Move
+	* up, down, right, left methods
+	* returns changed coordinates
+* Level
+	* Contains all the other model data
 
 ## Controller
 * Master-controller
