@@ -3,7 +3,7 @@
   */
 package de.htwg.se.puzzlerun.model
 
-class Level(grid: Grid, player: Player, ){
+class Level(grid: Grid, player: Player){
 
 
 }

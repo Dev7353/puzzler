@@ -5,5 +5,5 @@ package de.htwg.se.puzzlerun.model
 
 class Obstacle(x: Int, y: Int, move: Array[Move]){
   val coordinate = (x, y)
-  val allowed_moves =
+  val allowed_moves = "None"
 }
