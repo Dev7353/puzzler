@@ -5,10 +5,10 @@ package de.htwg.se.puzzlerun.model
 
 class Grid(length: Int, height: Int) {
 
-  val grid = Array.ofDim(lenght, height)
+  val grid = Array.ofDim[Cell](length, height)
 
   def get_cell(x: Int, y: Int): Cell ={
-    return grid[x][y]
+    grid(x)(y)
   }
 
 }

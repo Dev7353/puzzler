@@ -3,7 +3,7 @@
   */
 package de.htwg.se.puzzlerun.model
 
-object Player{
+case class Player(x: Int, y: Int){
 
   var coordinate = (x, y)
 
