@@ -7,12 +7,16 @@ import org.scalatest._
   */
 class GridTest extends FlatSpec with Matchers {
 
-  test("testGrid") {
+  "a new grid" should "create a array" in {
+    val grid = new Grid(3, 3)
 
+    grid.grid.length === 3
+    grid.grid(0).length === 3
   }
 
-  test("testGet_cell") {
+  "a grid" should "return a cell" in {
+    val grid = new Grid(3, 3)
 
+    grid.getCell(0, 0).toString should be ("-")
   }
-
 }

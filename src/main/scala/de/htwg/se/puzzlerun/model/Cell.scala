@@ -5,6 +5,6 @@ package de.htwg.se.puzzlerun.model
 
 class Cell() {
 
-  var occupiedBy = """Test"""
+  override def toString: String = "-"
 
 }
