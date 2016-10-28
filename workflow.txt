@@ -1,0 +1,66 @@
+1. Main erzeugt Model, Controller und View Objekte.
+2. Der Controller wird mit der View und dem Model instantiert. 
+3. Die Main startet die Gameloop.
+	3.1 Das Grid wird gezeichnet
+	3.2 Die Obstacles und der Benutzer werden platziert und ein „möglicher“ Weg berechnet.
+4. Der Benutzer bekommt eine Auswahl an Möglichkeiten seinen Spieler zu laufen. 
+5. Der Controller übergibt die Gesetzen Koordinaten und zeichnet nach jedem Schritt das Grid.
+6. Bei Missachtung der Regeln kehrt der Spieler in seinen Ursprungszustand zurück , jedoch mit reduzierten Möglichkeiten.
+
+
+
+Fragen:
+- Wenn die Möglichkeiten reduziert werden, dann wird der richtige Weg nach mehreren Fehlschlägen ersichtlicher. Ist das gewollt? -> Möglichkeit werden resettet. 
+
+- Wo werden die level eingelesen?
+
+Bsp:
+Spielgröße: 4 4 bzw. Spielfeld einlesen aus Level.txt
+
+hoch 	= w
+runter = s
+rechts = d
+links 	= a
+
+Möglichkeiten: 3x hoch, 2x runter 4x rechts und 2x links
+
+z	-	-	-
+-	o	-	o
+o	o	-	-
+-	-	o	p
+
+Eingabe: w a w w a a
+
+Bestätigen -> play!
+
+z	-	-	-
+-	o	-	o
+o	o	-	p
+-	-	o	-
+____________________________
+z	-	-	-
+-	o	-	o
+o	o	p	-
+-	-	o	-
+____________________________
+z	-	-	-
+-	o	p	o
+o	o	-	-
+-	-	o	-
+____________________________
+z	-	p	-
+-	o	-	o
+o	o	-	-
+-	-	o	-
+____________________________
+z	p	-	-
+-	o	-	o
+o	o	-	-
+-	-	o	-
+____________________________
+w	-	-	-
+-	o	-	o
+o	o	-	-
+-	-	o	-
+
+Du hast gewonnen!
