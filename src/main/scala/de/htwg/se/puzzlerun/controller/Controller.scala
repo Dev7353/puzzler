@@ -2,8 +2,35 @@ package de.htwg.se.puzzlerun.controller
 
 import de.htwg.se.puzzlerun.model._
 
-case class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: Target){
+class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: Target){
 
+  var player_coord = this.player.coordinate
+  val grid_heigth = this.grid.height
+  val grid_length = this.grid.length
+  wrap()
+
+  def wrap(): Unit ={
+    val grid = this.grid.grid
+    for(i <- grid.indices; j <- grid(0).indices){
+
+      for(obstacle <- this.obstacles){
+
+        if((i, j) == obstacle.coordinate){
+          this.grid.setCell(i, j, obstacle)
+        }
+      }
+
+      if((i, j) == this.player.coordinate){
+        this.grid.setCell(i, j, this.player)
+      }
+
+      if((i, j) == target.coordinate){
+        this.grid.setCell(i, j, this.target)
+      }
+
+    }
+
+  }
   def getGrid(): Array[Array[Cell]] ={
 
     this.grid.grid
@@ -22,6 +49,8 @@ case class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], tar
   }
 
   def left(): Unit ={
-    
+
   }
+
+
 }

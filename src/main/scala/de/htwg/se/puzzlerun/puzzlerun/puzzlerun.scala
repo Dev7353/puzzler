@@ -39,9 +39,9 @@ object puzzlerun{
     val grid = Grid(4, 4)
     val player = Player(3, 3)
     val target = Target(0, 0)
-    var obstacles:List[Obstacle] = List(Obstacle(1,1), Obstacle(2,1),Obstacle(2,0),Obstacle(3,2),Obstacle(1,3))
-    var tui = new Tui()
-    var controller = new Controller(grid, player, target, obstacles)
+    val obstacles:List[Obstacle] = List(Obstacle(1,1), Obstacle(2,1),Obstacle(2,0),Obstacle(3,2),Obstacle(1,3))
+    val tui = new Tui()
+    var controller = new Controller(grid, player, obstacles, target )
 
     gameloop(controller, tui)
 
