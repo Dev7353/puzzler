@@ -3,8 +3,9 @@
   */
 package de.htwg.se.puzzlerun.model
 
-case class Player(x: Int, y: Int){
+case class Player(x: Int, y: Int) extends Cell{
 
   var coordinate = (x, y)
 
+  override def toString: String = "p"
 }

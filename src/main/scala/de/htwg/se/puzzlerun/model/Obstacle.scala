@@ -3,7 +3,8 @@
   */
 package de.htwg.se.puzzlerun.model
 
-case class Obstacle(x: Int, y: Int, move: Array[Move]){
+case class Obstacle (x: Int, y: Int) extends Cell{
   val coordinate = (x, y)
-  val allowed_moves = "None"
+
+  override def toString: String = "o"
 }

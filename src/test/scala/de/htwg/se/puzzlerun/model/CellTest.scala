@@ -7,12 +7,4 @@ import org.scalatest._
   */
 class CellTest extends FlatSpec with Matchers {
 
-  test("testOccupiedBy") {
-
-  }
-
-  test("testOccupiedBy_$eq") {
-
-  }
-
 }

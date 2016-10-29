@@ -3,12 +3,22 @@
   */
 package de.htwg.se.puzzlerun.model
 
-class Grid(length: Int, height: Int) {
+case class Grid(length: Int, height: Int) {
 
   val grid = Array.ofDim[Cell](length, height)
 
-  def get_cell(x: Int, y: Int): Cell ={
+  for(i <- grid.indices){
+    for(j <- grid(0).indices){
+
+      grid(i)(j) = new Cell()
+    }
+  }
+  def getCell(x: Int, y: Int): Cell ={
     grid(x)(y)
   }
 
+  def setCell(x: Int, y: Int, obj: Cell): Unit ={
+
+    grid(x)(y) = obj
+  }
 }
