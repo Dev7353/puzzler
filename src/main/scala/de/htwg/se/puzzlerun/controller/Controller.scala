@@ -3,10 +3,6 @@ package de.htwg.se.puzzlerun.controller
 import de.htwg.se.puzzlerun.model._
 
 class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: Target){
-
-  var player_coord = this.player.coordinate
-  val grid_heigth = this.grid.height
-  val grid_length = this.grid.length
   wrap()
 
   def wrap(): Unit ={
@@ -37,20 +33,31 @@ class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: 
   }
 
   def up(): Unit ={
-
+    val x = this.player.coordinate._1 - 1
+    grid.setCell(this.player.coordinate._1, this.player.coordinate._2, new Cell)
+    this.player.coordinate = (x, this.player.coordinate._2)
+    wrap()
   }
 
   def down(): Unit ={
-
+    val x = this.player.coordinate._1 + 1
+    grid.setCell(this.player.coordinate._1, this.player.coordinate._2, new Cell)
+    this.player.coordinate = (x, this.player.coordinate._2)
+    wrap()
   }
 
   def right(): Unit ={
-
+    val y = this.player.coordinate._2 + 1
+    grid.setCell(this.player.coordinate._1, this.player.coordinate._2, new Cell)
+    this.player.coordinate = (this.player.coordinate._1, y)
+    wrap()
   }
 
   def left(): Unit ={
-
+    val y = this.player.coordinate._2 - 1
+    grid.setCell(this.player.coordinate._1, this.player.coordinate._2, new Cell)
+    this.player.coordinate = (this.player.coordinate._1, y)
+    wrap()
   }
-
 
 }
