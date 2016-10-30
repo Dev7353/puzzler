@@ -13,23 +13,30 @@ object puzzlerun{
 
   def gameloop(controller: Controller, tui: Tui): Unit ={
 
-    print("hoch: \tw \n" +
-      "runter: \ts\n" +
-      "links: \ta\n" +
-      "rechts: \td\n")
+    print("hoch: \t\t w\n" +
+      "runter: \t s\n" +
+      "links: \t\t a\n" +
+      "rechts: \t d\n")
+    print("\n")
 
     while(true){
-      tui.draw(controller.getGrid())
-      var eingabe = readLine("Eingabe: ").toString.charAt(0)
+      tui.draw(controller.get_grid())
+      var eingabe = readLine("Eingabe: ").toCharArray
 
-      eingabe match{
-        case 'w' => controller.up()
-        case 'a' => controller.left()
-        case 's' => controller.down()
-        case 'd' => controller.right()
-        case _ => print("Falsche Eingabe.")
+      for(c <- eingabe){
+        c match{
+          case 'w' => controller.up()
+          case 'a' => controller.left()
+          case 's' => controller.down()
+          case 'd' => controller.right()
+          case _ => print("Falsche Eingabe.")
 
+        }
+
+        tui.draw(controller.get_grid())
+        print("____________________________\n")
       }
+
 
 
     }

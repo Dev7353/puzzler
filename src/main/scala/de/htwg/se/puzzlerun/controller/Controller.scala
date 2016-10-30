@@ -1,8 +1,11 @@
 package de.htwg.se.puzzlerun.controller
 
+import com.sun.prism.impl.Disposer
 import de.htwg.se.puzzlerun.model._
 
 class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: Target){
+  val grid_lenght = grid.length - 1
+  val grid_height = grid.height - 1
   wrap()
 
   def wrap(): Unit ={
@@ -27,15 +30,22 @@ class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: 
     }
 
   }
-  def getGrid(): Array[Array[Cell]] ={
+  def get_grid(): Grid ={
 
-    this.grid.grid
+    this.grid
   }
 
   def up(): Unit ={
+    val y = this.player.coordinate._2
     val x = this.player.coordinate._1 - 1
+    if(grid.getCell(x, y).isInstanceOf[Obstacle]){
+      return
+    }
+    if(grid.getCell(x, y).isInstanceOf[Target]){
+      return
+    }
     grid.setCell(this.player.coordinate._1, this.player.coordinate._2, new Cell)
-    this.player.coordinate = (x, this.player.coordinate._2)
+    this.player.coordinate = (x, y)
     wrap()
   }
 
