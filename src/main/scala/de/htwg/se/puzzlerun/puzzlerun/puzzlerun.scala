@@ -6,6 +6,7 @@ import scala.io.StdIn
 import de.htwg.se.puzzlerun.model._
 import de.htwg.se.puzzlerun.view.Tui
 import de.htwg.se.puzzlerun.controller.Controller
+import scala.util.control._
 
 import scala.io.StdIn._
 
@@ -19,25 +20,28 @@ object puzzlerun{
       "rechts: \t d\n")
     print("\n")
 
-    while(true){
-      tui.draw(controller.get_grid())
-      var eingabe = readLine("Eingabe: ").toCharArray
-
-      for(c <- eingabe){
-        c match{
-          case 'w' => controller.up()
-          case 'a' => controller.left()
-          case 's' => controller.down()
-          case 'd' => controller.right()
-          case _ => print("Falsche Eingabe.")
-
-        }
-
+    val loop = new Breaks
+    loop.breakable {
+      while(true) {
         tui.draw(controller.get_grid())
-        print("____________________________\n")
-      }
+        var eingabe = readLine("Eingabe: ").toCharArray
 
+        for (c <- eingabe) {
+          c match {
+            case 'w' => controller.up()
+            case 'a' => controller.left()
+            case 's' => controller.down()
+            case 'd' => controller.right()
+            case _ => print("Falsche Eingabe.")
+          }
+          controller.state match {
+            case Some(false) => loop.break;
+            case Some(true) => tui.draw(controller.get_grid())
+          }
 
+          print("____________________________\n")
+        }
+    }
 
     }
   }
