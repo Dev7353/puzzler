@@ -10,9 +10,9 @@ import scala.util.control._
 
 import scala.io.StdIn._
 
-object puzzlerun{
+object puzzleRun{
 
-  def gameloop(controller: Controller, tui: Tui): Unit ={
+  def gameLoop(controller: Controller, tui: Tui): Unit ={
 
     print("hoch: \t\t w\n" +
       "runter: \t s\n" +
@@ -54,7 +54,7 @@ object puzzlerun{
     val tui = new Tui()
     var controller = new Controller(grid, player, obstacles, target )
 
-    gameloop(controller, tui)
+    gameLoop(controller, tui)
 
 
   }
