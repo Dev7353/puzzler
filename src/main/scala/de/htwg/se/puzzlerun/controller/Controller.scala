@@ -10,7 +10,7 @@ class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: 
   wrap()
 
   def wrap(): Unit ={
-    val grid = this.grid.grid
+    val grid = this.grid.createGrid()
     for(i <- grid.indices; j <- grid(0).indices){
 
       for(obstacle <- this.obstacles){

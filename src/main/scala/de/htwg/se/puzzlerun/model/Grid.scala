@@ -4,21 +4,22 @@
 package de.htwg.se.puzzlerun.model
 
 case class Grid(length: Int, height: Int) {
-
-  val grid = Array.ofDim[Cell](length, height)
-
-  for(i <- grid.indices){
-    for(j <- grid(0).indices){
-
-      grid(i)(j) = new Cell()
-    }
-  }
+  var grid = Array.ofDim[Cell](length, height)
   def getCell(x: Int, y: Int): Cell ={
     grid(x)(y)
   }
 
-  def setCell(x: Int, y: Int, obj: Cell): Unit ={
-
+  def setCell(x: Int, y: Int, obj: Cell): Cell ={
     grid(x)(y) = obj
+    grid(x)(y)
+  }
+
+  def createGrid(): Array[Array[Cell]] = {
+    for(i <- grid.indices){
+      for(j <- grid(0).indices){
+        grid(i)(j) = new Cell()
+      }
+    }
+    grid
   }
 }
