@@ -6,7 +6,7 @@ import de.htwg.se.puzzlerun.model._
 class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: Target){
   val grid_lenght = grid.length - 1
   val grid_height = grid.height - 1
-  var state = None: Option[Boolean]
+  var state = 0 // 0 running 1 defeat 2 victory
   wrap()
 
   def wrap(): Unit ={
@@ -75,24 +75,12 @@ class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: 
   def checkCell(x: Int, y: Int): Unit = {
     try {
       if (grid.getCell(x, y).isInstanceOf[Obstacle]) {
-        defeat()
+        state = 1
       } else if (grid.getCell(x, y).isInstanceOf[Target]) {
-        victory()
-      } else {
-        state = Some(true)
+        state = 2
       }
     } catch {
-      case bound: java.lang.ArrayIndexOutOfBoundsException => defeat()
+      case bound: java.lang.ArrayIndexOutOfBoundsException => state = 1
     }
-  }
-
-  def defeat(): Unit = {
-    print("Defeat!\n")
-    state = Some(false)
-  }
-
-  def victory(): Unit = {
-    print("Victory!\n")
-    state = Some(false)
   }
 }
