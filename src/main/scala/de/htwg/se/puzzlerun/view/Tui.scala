@@ -1,19 +1,18 @@
 package de.htwg.se.puzzlerun.view
 
-import de.htwg.se.puzzlerun.model.Grid
+import de.htwg.se.puzzlerun.controller._
+import de.htwg.se.puzzlerun.util._
 
-class Tui{
-  def draw(grid: Grid){
-    val field = grid.grid
-   for(i <- field.indices){
-     for(j <- field(0).indices){
-      print(field(i)(j) + "\t")
-     }
-     print("\n")
-   }
+case class Tui(var c: Controller) extends Observable{
 
-    print("\n")
+  def update = draw()
+
+  def draw(): Unit ={
+    print(c.grid.toString)
   }
+
+
+
 }
 
 
