@@ -39,16 +39,21 @@ class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: 
     this.grid
   }
 
+  def move(x: Int, y: Int): Unit ={
+
+    checkCell(x, y)
+    grid.setCell(player.coordinate._1, player.coordinate._2, new Cell)
+    player.coordinate = (x, y)
+    wrap()
+  }
+
   def up(): Unit ={
     /*
     Moves the player one field up.
      */
     val y = this.player.coordinate._2
     val x = this.player.coordinate._1 - 1
-    checkCell(x, y)
-    grid.setCell(this.player.coordinate._1, this.player.coordinate._2, new Cell)
-    this.player.coordinate = (x, y)
-    wrap()
+    move(x, y)
     checkMoves(moves.get("Up").get)
     val newAmount = moves.get("Up").get - 1
     moves.put("Up", newAmount)
@@ -60,10 +65,7 @@ class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: 
      */
     val y = this.player.coordinate._2
     val x = this.player.coordinate._1 + 1
-    checkCell(x, y)
-    grid.setCell(this.player.coordinate._1, this.player.coordinate._2, new Cell)
-    this.player.coordinate = (x, this.player.coordinate._2)
-    wrap()
+    move(x, y)
     checkMoves(moves.get("Down").get)
     val newAmount = moves.get("Down").get - 1
     moves.put("Down", newAmount)
@@ -75,10 +77,7 @@ class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: 
      */
     val y = this.player.coordinate._2 + 1
     val x = this.player.coordinate._1
-    checkCell(x, y)
-    grid.setCell(this.player.coordinate._1, this.player.coordinate._2, new Cell)
-    this.player.coordinate = (this.player.coordinate._1, y)
-    wrap()
+    move(x, y)
     checkMoves(moves.get("Right").get)
     val newAmount = moves.get("Right").get - 1
     moves.put("Right", newAmount)
@@ -90,10 +89,7 @@ class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: 
      */
     val y = this.player.coordinate._2 - 1
     val x = this.player.coordinate._1
-    checkCell(x, y)
-    grid.setCell(this.player.coordinate._1, this.player.coordinate._2, new Cell)
-    this.player.coordinate = (this.player.coordinate._1, y)
-    wrap()
+    move(x, y)
     checkMoves(moves.get("Left").get)
     val newAmount = moves.get("Left").get - 1
     moves.put("Left", newAmount)
