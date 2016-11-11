@@ -25,7 +25,7 @@ object puzzleRun{
       while(true) {
         tui.draw(controller.get_grid())
         var eingabe = readLine("Eingabe: \n").toCharArray
-
+        var eingabeLength = eingabe.length
         for (c <- eingabe) {
           c match {
             case 'w' => controller.up()
@@ -34,13 +34,22 @@ object puzzleRun{
             case 'd' => controller.right()
             case _ => print("Falsche Eingabe.\n")
           }
+          eingabeLength -= 1
+
           controller.state match {
-            case 0 =>
+            case 0 => if(eingabeLength == 0) {
+              tui.draw(controller.get_grid())
+              print("Du hast verloren! Du bist nicht am Ziel angekommen.\n")
+              loop.break()
+            }
             case 1 => tui.draw(controller.get_grid())
+                      print("Du hast verloren! Du bist auf ein Hindernis gestossen.\n")
                                 loop.break
-            case 2 => print("Du hast gewonnen!\n")
+            case 2 => tui.draw(controller.get_grid())
+              print("Du hast gewonnen!\n")
                                 loop.break
           }
+
 
           print("____________________________\n")
         }
@@ -58,8 +67,8 @@ object puzzleRun{
   }
   def main(args: Array[String]): Unit = {
 
-    val grid = Grid(8, 8)
-    val player = Player(7, 7)
+    val grid = Grid(4, 4)
+    val player = Player(3, 3)
     val target = Target(0, 0)
     val obstacles:List[Obstacle] = List(Obstacle(1,1), Obstacle(2,1),Obstacle(2,0),Obstacle(3,2),Obstacle(1,3))
     val tui = new Tui()
