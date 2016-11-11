@@ -58,7 +58,7 @@ object puzzleRun{
             case 3 =>
               controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
               tui.draw(controller.getGrid())
-              print("Du hast verloren! Du hast keine Moves mehr.")
+              print("Du hast verloren! Du hast keine Moves mehr.\n")
               loop.break
           }
 

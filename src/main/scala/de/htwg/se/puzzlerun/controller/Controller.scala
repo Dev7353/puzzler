@@ -114,7 +114,11 @@ class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: 
       case bound: java.lang.ArrayIndexOutOfBoundsException => state = 1
     }
   }
+
   def checkMoves(amount: Int): Unit ={
+    /*
+    Checks whether the player has exceeded the moves limit.
+     */
     if(amount == 0) state = 3
   }
 }
