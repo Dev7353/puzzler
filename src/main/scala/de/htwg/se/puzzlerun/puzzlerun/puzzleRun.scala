@@ -24,15 +24,19 @@ object puzzleRun{
     val loop = new Breaks
     loop.breakable {
       while(true) {
-        tui.draw(controller.getGrid())
+        tui.draw()
         var eingabe = readLine("Eingabe: \n").toCharArray
         var eingabeLength = eingabe.length
         for (c <- eingabe) {
           c match {
             case 'w' => controller.up()
+                        tui.draw()
             case 'a' => controller.left()
+                        tui.draw()
             case 's' => controller.down()
+                        tui.draw()
             case 'd' => controller.right()
+                        tui.draw()
             case _ => print("Falsche Eingabe.\n")
           }
           eingabeLength -= 1
@@ -41,23 +45,23 @@ object puzzleRun{
             case 0 =>
               if(eingabeLength == 0) {
                 controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n"))
-                tui.draw(controller.getGrid())
+                tui.draw()
                 print("Du hast verloren! Du bist nicht am Ziel angekommen.\n")
                 loop.break()
               }
             case 1 =>
               controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
-              tui.draw(controller.getGrid())
+              tui.draw()
               print("Du hast verloren! Du bist auf ein Hindernis gestossen.\n")
               loop.break
             case 2 =>
               controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
-              tui.draw(controller.getGrid())
+              tui.draw()
               print("Du hast gewonnen!\n")
               loop.break
             case 3 =>
               controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
-              tui.draw(controller.getGrid())
+              tui.draw()
               print("Du hast verloren! Du hast keine Moves mehr.\n")
               loop.break
           }
@@ -84,9 +88,8 @@ object puzzleRun{
     val target = Target(0, 0)
     val obstacles:List[Obstacle] = List(Obstacle(1,1), Obstacle(2,1),Obstacle(2,0),Obstacle(3,2),Obstacle(1,3))
     val allowedMoves = Map("Up" -> 5, "Down" -> 5, "Left" -> 5, "Right" -> 5)
-    val tui = new Tui()
     var controller = new Controller(grid, player, obstacles, target, allowedMoves)
-
+    val tui = new Tui(controller)
     gameLoop(controller, tui)
 
 

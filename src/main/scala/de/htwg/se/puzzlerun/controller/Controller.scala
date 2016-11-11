@@ -1,10 +1,9 @@
 package de.htwg.se.puzzlerun.controller
 
-import com.sun.prism.impl.Disposer
 import de.htwg.se.puzzlerun.model._
 import scala.collection.mutable.Map
 
-class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: Target, var moves:Map[String, Int]){
+class Controller(var grid: Grid, player: Player, obstacles: List[Obstacle], target: Target, var moves:Map[String, Int]){
   val grid_lenght = grid.length - 1
   val grid_height = grid.height - 1
   var state = 0 // 0 = Continue; 1 = Defeat 2 = Victory
@@ -30,19 +29,12 @@ class Controller(grid: Grid, player: Player, obstacles: List[Obstacle], target: 
       }
 
     }
-
-  }
-  def getGrid(): Grid ={
-    /*
-    Returns the grid.
-     */
-    this.grid
   }
 
   def move(x: Int, y: Int): Unit ={
 
     checkCell(x, y)
-    grid.setCell(player.coordinate._1, player.coordinate._2, new Cell)
+    this.grid.setCell(player.x, player.y, new Cell)
     player.coordinate = (x, y)
     wrap()
   }
