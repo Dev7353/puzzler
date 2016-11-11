@@ -22,4 +22,18 @@ case class Grid(length: Int, height: Int) {
     }
     grid
   }
+
+  override def toString: String = {
+
+    var output = ""
+
+    val field = grid
+    for(i <- field.indices){
+      for(j <- field(0).indices){
+        output += field(i)(j) + "\t"
+      }
+      output += "\n"
+    }
+     output
+  }
 }
