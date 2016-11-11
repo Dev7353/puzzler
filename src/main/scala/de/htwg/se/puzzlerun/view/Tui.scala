@@ -9,7 +9,7 @@ class Tui{
      for(j <- field(0).indices){
       print(field(i)(j) + "\t")
      }
-     println()
+     print("\n")
    }
 
     print("\n")

@@ -7,6 +7,7 @@ import de.htwg.se.puzzlerun.model._
 import de.htwg.se.puzzlerun.view.Tui
 import de.htwg.se.puzzlerun.controller.Controller
 import scala.util.control._
+import scala.collection.mutable.Map
 
 import scala.io.StdIn._
 
@@ -23,7 +24,7 @@ object puzzleRun{
     val loop = new Breaks
     loop.breakable {
       while(true) {
-        tui.draw(controller.get_grid())
+        tui.draw(controller.getGrid())
         var eingabe = readLine("Eingabe: \n").toCharArray
         var eingabeLength = eingabe.length
         for (c <- eingabe) {
@@ -37,17 +38,28 @@ object puzzleRun{
           eingabeLength -= 1
 
           controller.state match {
-            case 0 => if(eingabeLength == 0) {
-              tui.draw(controller.get_grid())
-              print("Du hast verloren! Du bist nicht am Ziel angekommen.\n")
-              loop.break()
-            }
-            case 1 => tui.draw(controller.get_grid())
-                      print("Du hast verloren! Du bist auf ein Hindernis gestossen.\n")
-                                loop.break
-            case 2 => tui.draw(controller.get_grid())
+            case 0 =>
+              if(eingabeLength == 0) {
+                controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n"))
+                tui.draw(controller.getGrid())
+                print("Du hast verloren! Du bist nicht am Ziel angekommen.\n")
+                loop.break()
+              }
+            case 1 =>
+              controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
+              tui.draw(controller.getGrid())
+              print("Du hast verloren! Du bist auf ein Hindernis gestossen.\n")
+              loop.break
+            case 2 =>
+              controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
+              tui.draw(controller.getGrid())
               print("Du hast gewonnen!\n")
-                                loop.break
+              loop.break
+            case 3 =>
+              controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
+              tui.draw(controller.getGrid())
+              print("Du hast verloren! Du hast keine Moves mehr.")
+              loop.break
           }
 
 
@@ -71,8 +83,9 @@ object puzzleRun{
     val player = Player(3, 3)
     val target = Target(0, 0)
     val obstacles:List[Obstacle] = List(Obstacle(1,1), Obstacle(2,1),Obstacle(2,0),Obstacle(3,2),Obstacle(1,3))
+    val allowedMoves = Map("Up" -> 5, "Down" -> 5, "Left" -> 5, "Right" -> 5)
     val tui = new Tui()
-    var controller = new Controller(grid, player, obstacles, target )
+    var controller = new Controller(grid, player, obstacles, target, allowedMoves)
 
     gameLoop(controller, tui)
 
