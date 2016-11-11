@@ -26,13 +26,14 @@ class Controller(var grid: Grid, player: Player,
         }
       }
 
+      if((i, j) == target.coordinate){
+        this.grid.setCell(i, j, this.target)
+      }
+
       if((i, j) == this.player.coordinate){
         this.grid.setCell(i, j, this.player)
       }
 
-      if((i, j) == target.coordinate){
-        this.grid.setCell(i, j, this.target)
-      }
 
     }
   }
