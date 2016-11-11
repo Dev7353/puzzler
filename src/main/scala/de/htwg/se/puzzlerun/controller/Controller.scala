@@ -1,12 +1,18 @@
 package de.htwg.se.puzzlerun.controller
 
 import de.htwg.se.puzzlerun.model._
-import scala.collection.mutable.Map
 
-class Controller(var grid: Grid, player: Player, obstacles: List[Obstacle], target: Target, var moves:Map[String, Int]){
+import scala.collection.mutable.Map
+import de.htwg.se.puzzlerun.util.Observable
+
+
+class Controller(var grid: Grid, player: Player,
+                 obstacles: List[Obstacle], target: Target,
+                 var moves:Map[String, Int]) extends Observable {
   val grid_lenght = grid.length - 1
   val grid_height = grid.height - 1
   var state = 0 // 0 = Continue; 1 = Defeat 2 = Victory
+
   wrap()
 
   def wrap(): Unit ={
@@ -37,6 +43,7 @@ class Controller(var grid: Grid, player: Player, obstacles: List[Obstacle], targ
     this.grid.setCell(player.x, player.y, new Cell)
     player.coordinate = (x, y)
     wrap()
+    notifyObservers
   }
 
   def up(): Unit ={
@@ -49,6 +56,7 @@ class Controller(var grid: Grid, player: Player, obstacles: List[Obstacle], targ
     checkMoves(moves.get("Up").get)
     val newAmount = moves.get("Up").get - 1
     moves.put("Up", newAmount)
+
   }
 
   def down(): Unit ={
