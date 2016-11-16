@@ -2,19 +2,19 @@
   * Created by kmg on 27.10.16.
   */
 package de.htwg.se.puzzlerun.puzzlerun
+
 import scala.io.StdIn
 import de.htwg.se.puzzlerun.model._
 import de.htwg.se.puzzlerun.view.Tui
 import de.htwg.se.puzzlerun.controller.Controller
+
 import scala.util.control._
 import scala.collection.mutable.Map
-
 import scala.io.StdIn._
 
 object puzzleRun{
 
   def gameLoop(controller: Controller, tui: Tui): Unit ={
-
     print("hoch: \t\t w\n" +
       "runter: \t s\n" +
       "links: \t\t a\n" +
@@ -32,20 +32,20 @@ object puzzleRun{
             case 0 =>
               if(eingabeLength == 0) {
                 controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n"))
-                print("Du hast verloren! Du bist nicht am Ziel angekommen.\n")
+                tui.defeat("Du bist nicht am Ziel angekommen.")
                 loop.break
               }
             case 1 =>
               controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
-              print("Du hast verloren! Du bist auf ein Hindernis gestossen.\n")
+              tui.defeat("Du bist auf ein Hindernis gestossen.")
               loop.break
             case 2 =>
               controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
-              print("Du hast gewonnen!\n")
+              tui.victory()
               loop.break
             case 3 =>
               controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
-              print("Du hast verloren! Du hast keine Moves mehr.\n")
+              tui.defeat("Du hast keine Moves mehr.")
               loop.break
           }
         }
@@ -58,6 +58,7 @@ object puzzleRun{
 
       case "j" => main(args = new Array[String](3))
       case "n" => return
+      case default => print("Input not recognized. Please put in 'j' or 'n")
     }
   }
   def main(args: Array[String]): Unit = {
