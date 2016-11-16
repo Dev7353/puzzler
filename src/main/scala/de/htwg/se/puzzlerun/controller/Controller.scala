@@ -54,8 +54,7 @@ class Controller(var grid: Grid, player: Player,
     val y = this.player.coordinate._2
     val x = this.player.coordinate._1 - 1
     move(x, y)
-    checkMoves(moves.get("Up").get)
-    val newAmount = moves.get("Up").get - 1
+    val newAmount = checkMoves(moves.get("Up").get)
     moves.put("Up", newAmount)
 
   }
@@ -67,8 +66,7 @@ class Controller(var grid: Grid, player: Player,
     val y = this.player.coordinate._2
     val x = this.player.coordinate._1 + 1
     move(x, y)
-    checkMoves(moves.get("Down").get)
-    val newAmount = moves.get("Down").get - 1
+    val newAmount = checkMoves(moves.get("Down").get)
     moves.put("Down", newAmount)
   }
 
@@ -79,8 +77,7 @@ class Controller(var grid: Grid, player: Player,
     val y = this.player.coordinate._2 + 1
     val x = this.player.coordinate._1
     move(x, y)
-    checkMoves(moves.get("Right").get)
-    val newAmount = moves.get("Right").get - 1
+    val newAmount =checkMoves(moves.get("Right").get)
     moves.put("Right", newAmount)
   }
 
@@ -91,8 +88,7 @@ class Controller(var grid: Grid, player: Player,
     val y = this.player.coordinate._2 - 1
     val x = this.player.coordinate._1
     move(x, y)
-    checkMoves(moves.get("Left").get)
-    val newAmount = moves.get("Left").get - 1
+    val newAmount = checkMoves(moves.get("Left").get)
     moves.put("Left", newAmount)
   }
 
@@ -112,10 +108,13 @@ class Controller(var grid: Grid, player: Player,
     }
   }
 
-  def checkMoves(amount: Int): Unit ={
+  def checkMoves(amount: Int): Int ={
     /*
     Checks whether the player has exceeded the moves limit.
      */
     if(amount == 0) state = 3
+    var newAmount = amount - 1
+    if(newAmount < 0) newAmount = 0 // Keep moves at 0 and don't go negative
+    newAmount
   }
 }
