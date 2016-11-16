@@ -10,6 +10,7 @@ bin/
 .idea/
 target/
 .idea*/
+*.iml
 
 # Maven
 log/
@@ -47,3 +48,4 @@ project/.sbtserver
 
 # Application
 yourgame.log
+/out
