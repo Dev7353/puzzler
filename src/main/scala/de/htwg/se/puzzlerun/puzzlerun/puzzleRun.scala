@@ -26,7 +26,8 @@ object puzzleRun{
       while(true) {
         tui.draw()
         var eingabeLength = tui.input()
-        eingabeLength -= 1
+        eingabeLength -= 1 // TODO: Fix bug that it sometimes doesn't decrement in time
+        print("\n" + "Eingabelänge: " + eingabeLength + "\n")
 
           controller.state match {
             case 0 =>
@@ -37,7 +38,7 @@ object puzzleRun{
               }
             case 1 =>
               controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
-              tui.defeat("Du bist auf ein Hindernis gestossen.")
+              tui.defeat("Du bist auf ein Hindernis gestossen oder bist vom Spielfeld gekommen.")
               loop.break
             case 2 =>
               controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))

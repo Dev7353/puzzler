@@ -14,6 +14,7 @@ case class Tui(var c: Controller) extends Observer {
   def draw(): Unit = {
     print(c.grid.toString)
     print("____________________________\n")
+    Thread.sleep(1500)
   }
 
   def input(): Int = {
