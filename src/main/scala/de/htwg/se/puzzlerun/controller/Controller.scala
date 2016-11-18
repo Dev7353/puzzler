@@ -117,4 +117,9 @@ class Controller(var grid: Grid, player: Player,
     if(newAmount < 0) newAmount = 0 // Keep moves at 0 and don't go negative
     newAmount
   }
+
+  def checkEingabeLength(eingabeLength: Int): Boolean={
+
+    eingabeLength == 0
+  }
 }

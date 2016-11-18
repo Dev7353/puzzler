@@ -30,7 +30,7 @@ object puzzleRun{
 
           controller.state match {
             case 0 =>
-              if(eingabeLength == 0) {
+              if(controller.checkEingabeLength(eingabeLength)) {
                 controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n"))
                 tui.defeat("Du bist nicht am Ziel angekommen.")
                 loop.break
