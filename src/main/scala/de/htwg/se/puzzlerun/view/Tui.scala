@@ -35,7 +35,9 @@ case class Tui(var c: Controller) extends Observer {
         case 'd' =>
           this.c.right()
           eingabeLength -= 1
-        case _ => print("Falsche Eingabe.\n")
+        case _ =>
+          print("Falsche Eingabe. Wird ignoriert.\n")
+          eingabeLength -= 1
       }
     }
     eingabeLength
