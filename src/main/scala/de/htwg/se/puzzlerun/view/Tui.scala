@@ -18,7 +18,6 @@ case class Tui(var c: Controller) extends Observer {
   }
 
   def input(): Int = {
-
     var eingabe = readLine("Eingabe: \n").toCharArray
     var eingabeLength = eingabe.length
     for (c <- eingabe) {

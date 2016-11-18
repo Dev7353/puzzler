@@ -1,5 +1,4 @@
 package de.htwg.se.puzzlerun.model
-import de.htwg.se.puzzlerun.model.Cell
 
 /**
  * Created by kmg on 28.10.16.

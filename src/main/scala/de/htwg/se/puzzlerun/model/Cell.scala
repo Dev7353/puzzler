@@ -5,5 +5,4 @@ package de.htwg.se.puzzlerun.model
 
 class Cell() {
   override def toString: String = "-"
-
 }
