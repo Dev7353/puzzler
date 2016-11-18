@@ -1,6 +1,6 @@
 /**
-  * Created by kmg on 27.10.16.
-  */
+ * Created by kmg on 27.10.16.
+ */
 package de.htwg.se.puzzlerun.puzzlerun
 
 import scala.io.StdIn
@@ -12,9 +12,9 @@ import scala.util.control._
 import scala.collection.mutable.Map
 import scala.io.StdIn._
 
-object puzzleRun{
+object puzzleRun {
 
-  def gameLoop(controller: Controller, tui: Tui): Unit ={
+  def gameLoop(controller: Controller, tui: Tui): Unit = {
     print("hoch: \t\t w\n" +
       "runter: \t s\n" +
       "links: \t\t a\n" +
@@ -23,32 +23,32 @@ object puzzleRun{
 
     val loop = new Breaks
     loop.breakable {
-      while(true) {
+      while (true) {
         tui.draw()
         var eingabeLength = tui.input()
         print("\n" + "Eingabelänge: " + eingabeLength + "\n")
 
-          controller.state match {
-            case 0 =>
-              if(controller.checkEingabeLength(eingabeLength)) {
-                controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n"))
-                tui.defeat("Du bist nicht am Ziel angekommen.")
-                loop.break
-              }
-            case 1 =>
-              controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
-              tui.defeat("Du bist auf ein Hindernis gestossen oder bist vom Spielfeld gekommen.")
+        controller.state match {
+          case 0 =>
+            if (controller.checkEingabeLength(eingabeLength)) {
+              controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n"))
+              tui.defeat("Du bist nicht am Ziel angekommen.")
               loop.break
-            case 2 =>
-              controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
-              tui.victory()
-              loop.break
-            case 3 =>
-              controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
-              tui.defeat("Du hast keine Moves mehr.")
-              loop.break
-          }
+            }
+          case 1 =>
+            controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
+            tui.defeat("Du bist auf ein Hindernis gestossen oder bist vom Spielfeld gekommen.")
+            loop.break
+          case 2 =>
+            controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
+            tui.victory()
+            loop.break
+          case 3 =>
+            controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
+            tui.defeat("Du hast keine Moves mehr.")
+            loop.break
         }
+      }
     }
 
     print("Weiterspielen?\n")
@@ -66,12 +66,11 @@ object puzzleRun{
     val grid = Grid(4, 4)
     val player = Player(3, 3)
     val target = Target(0, 0)
-    val obstacles:List[Obstacle] = List(Obstacle(1,1), Obstacle(2,1),Obstacle(2,0),Obstacle(3,2),Obstacle(1,3))
+    val obstacles: List[Obstacle] = List(Obstacle(1, 1), Obstacle(2, 1), Obstacle(2, 0), Obstacle(3, 2), Obstacle(1, 3))
     val allowedMoves = Map("Up" -> 5, "Down" -> 5, "Left" -> 5, "Right" -> 5)
     var controller = new Controller(grid, player, obstacles, target, allowedMoves)
     val tui = new Tui(controller)
     gameLoop(controller, tui)
-
 
   }
 

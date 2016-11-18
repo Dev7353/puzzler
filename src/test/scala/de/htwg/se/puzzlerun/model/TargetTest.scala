@@ -3,8 +3,8 @@ package de.htwg.se.puzzlerun.model
 import org.scalatest._
 
 /**
-  * Created by stefl on 01.11.2016.
-  */
+ * Created by stefl on 01.11.2016.
+ */
 class TargetTest extends WordSpec with Matchers {
   "A new target" should {
     val newTarget = Target(5, 5)

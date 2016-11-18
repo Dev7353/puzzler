@@ -5,40 +5,38 @@ import de.htwg.se.puzzlerun.model._
 import scala.collection.mutable.Map
 import de.htwg.se.puzzlerun.util.Observable
 
-
-class Controller(var grid: Grid, player: Player,
-                 obstacles: List[Obstacle], target: Target,
-                 var moves:Map[String, Int]) extends Observable {
+class Controller(var grid: Grid, val player: Player,
+    obstacles: List[Obstacle], target: Target,
+    var moves: Map[String, Int]) extends Observable {
   val grid_lenght = grid.length - 1
   val grid_height = grid.height - 1
   var state = 0 // 0 = Continue; 1 = Defeat 2 = Victory
 
   wrap()
 
-  def wrap(): Unit ={
+  def wrap(): Unit = {
     val grid = this.grid.createGrid()
-    for(i <- grid.indices; j <- grid(0).indices){
+    for (i <- grid.indices; j <- grid(0).indices) {
 
-      for(obstacle <- this.obstacles){
+      for (obstacle <- this.obstacles) {
 
-        if((i, j) == obstacle.coordinate){
+        if ((i, j) == obstacle.coordinate) {
           this.grid.setCell(i, j, obstacle)
         }
       }
 
-      if((i, j) == target.coordinate){
+      if ((i, j) == target.coordinate) {
         this.grid.setCell(i, j, this.target)
       }
 
-      if((i, j) == this.player.coordinate){
+      if ((i, j) == this.player.coordinate) {
         this.grid.setCell(i, j, this.player)
       }
-
 
     }
   }
 
-  def move(x: Int, y: Int): Unit ={
+  def move(x: Int, y: Int): Unit = {
 
     checkCell(x, y)
     this.grid.setCell(player.x, player.y, new Cell)
@@ -47,7 +45,7 @@ class Controller(var grid: Grid, player: Player,
     notifyObservers
   }
 
-  def up(): Unit ={
+  def up(): Unit = {
     /*
     Moves the player one field up.
      */
@@ -59,7 +57,7 @@ class Controller(var grid: Grid, player: Player,
 
   }
 
-  def down(): Unit ={
+  def down(): Unit = {
     /*
     Moves the player one field down.
      */
@@ -70,18 +68,18 @@ class Controller(var grid: Grid, player: Player,
     moves.put("Down", newAmount)
   }
 
-  def right(): Unit ={
+  def right(): Unit = {
     /*
     Moves the player one field to the right.
      */
     val y = this.player.coordinate._2 + 1
     val x = this.player.coordinate._1
     move(x, y)
-    val newAmount =checkMoves(moves.get("Right").get)
+    val newAmount = checkMoves(moves.get("Right").get)
     moves.put("Right", newAmount)
   }
 
-  def left(): Unit ={
+  def left(): Unit = {
     /*
     Moves the player one field to the left
      */
@@ -92,7 +90,7 @@ class Controller(var grid: Grid, player: Player,
     moves.put("Left", newAmount)
   }
 
-  def checkCell(x: Int, y: Int): Unit ={
+  def checkCell(x: Int, y: Int): Unit = {
     /*
     Checks whether the cell to be accessed is of type Obstacle or Target.
     Sets state accordingly for the game loop.
@@ -102,23 +100,25 @@ class Controller(var grid: Grid, player: Player,
         state = 1
       } else if (grid.getCell(x, y).isInstanceOf[Target]) {
         state = 2
+      } else {
+        state = 0
       }
     } catch {
       case bound: java.lang.ArrayIndexOutOfBoundsException => state = 1
     }
   }
 
-  def checkMoves(amount: Int): Int ={
+  def checkMoves(amount: Int): Int = {
     /*
     Checks whether the player has exceeded the moves limit.
      */
-    if(amount == 0) state = 3
+    if (amount == 0) state = 3
     var newAmount = amount - 1
-    if(newAmount < 0) newAmount = 0 // Keep moves at 0 and don't go negative
+    if (newAmount < 0) newAmount = 0 // Keep moves at 0 and don't go negative
     newAmount
   }
 
-  def checkEingabeLength(eingabeLength: Int): Boolean={
+  def checkEingabeLength(eingabeLength: Int): Boolean = {
 
     eingabeLength == 0
   }
