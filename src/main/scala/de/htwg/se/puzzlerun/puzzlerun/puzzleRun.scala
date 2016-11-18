@@ -26,7 +26,6 @@ object puzzleRun{
       while(true) {
         tui.draw()
         var eingabeLength = tui.input()
-        eingabeLength -= 1 // TODO: Fix bug that it sometimes doesn't decrement in time
         print("\n" + "Eingabelänge: " + eingabeLength + "\n")
 
           controller.state match {
