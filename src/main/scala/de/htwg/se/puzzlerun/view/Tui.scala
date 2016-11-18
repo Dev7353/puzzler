@@ -18,7 +18,6 @@ case class Tui(var c: Controller) extends Observer {
   }
 
   def input(): Int = {
-
     var eingabe = readLine("Eingabe: \n").toCharArray
     var eingabeLength = eingabe.length
     for (c <- eingabe) {
@@ -35,7 +34,9 @@ case class Tui(var c: Controller) extends Observer {
         case 'd' =>
           this.c.right()
           eingabeLength -= 1
-        case _ => print("Falsche Eingabe.\n")
+        case _ =>
+          print("Falsche Eingabe. Wird ignoriert.\n")
+          eingabeLength -= 1
       }
     }
     eingabeLength
