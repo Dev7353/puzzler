@@ -14,6 +14,7 @@ case class Tui(var c: Controller) extends Observer {
   def draw(): Unit = {
     print(c.grid.toString)
     print("____________________________\n")
+    Thread.sleep(1500)
   }
 
   def input(): Int = {
@@ -23,9 +24,13 @@ case class Tui(var c: Controller) extends Observer {
     for (c <- eingabe) {
       c match {
         case 'w' => this.c.up()
+          eingabeLength -= 1
         case 'a' => this.c.left()
+          eingabeLength -= 1
         case 's' => this.c.down()
+          eingabeLength -= 1
         case 'd' => this.c.right()
+          eingabeLength -= 1
         case _ => print("Falsche Eingabe.\n")
       }
     }
