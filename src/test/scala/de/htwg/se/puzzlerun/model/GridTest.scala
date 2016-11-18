@@ -3,8 +3,8 @@ package de.htwg.se.puzzlerun.model
 import org.scalatest._
 
 /**
-  * Created by stefl on 25.10.2016.
-  */
+ * Created by stefl on 25.10.2016.
+ */
 class GridTest extends WordSpec with Matchers {
 
   "A new grid" should {
@@ -19,12 +19,18 @@ class GridTest extends WordSpec with Matchers {
       grid.height should equal(3)
     }
     "and should return a cell" in {
-      grid.getCell(0, 0).toString should be ("-")
+      grid.getCell(0, 0).toString should be("-")
     }
     "and should set a cell" in {
       val newCell = new Cell
       grid.setCell(0, 0, newCell)
       grid.grid(0)(0) shouldBe a[Cell]
+    }
+
+    "tostring should output length 1" in {
+
+      val grid2 = Grid(1, 1)
+      assert(grid2.toString.length() == 6)
     }
 
   }

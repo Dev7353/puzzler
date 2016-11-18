@@ -23,13 +23,17 @@ case class Tui(var c: Controller) extends Observer {
     var eingabeLength = eingabe.length
     for (c <- eingabe) {
       c match {
-        case 'w' => this.c.up()
+        case 'w' =>
+          this.c.up()
           eingabeLength -= 1
-        case 'a' => this.c.left()
+        case 'a' =>
+          this.c.left()
           eingabeLength -= 1
-        case 's' => this.c.down()
+        case 's' =>
+          this.c.down()
           eingabeLength -= 1
-        case 'd' => this.c.right()
+        case 'd' =>
+          this.c.right()
           eingabeLength -= 1
         case _ => print("Falsche Eingabe.\n")
       }
@@ -43,5 +47,4 @@ case class Tui(var c: Controller) extends Observer {
     print("Du hast gewonnen! ")
   }
 }
-
 
