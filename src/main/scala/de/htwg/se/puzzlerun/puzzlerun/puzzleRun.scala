@@ -63,12 +63,7 @@ object puzzleRun {
   }
   def main(args: Array[String]): Unit = {
 
-    val grid = Grid(4, 4)
-    val player = Player(3, 3)
-    val target = Target(0, 0)
-    val obstacles: List[Obstacle] = List(Obstacle(1, 1), Obstacle(2, 1), Obstacle(2, 0), Obstacle(3, 2), Obstacle(1, 3))
-    val allowedMoves = Map("Up" -> 5, "Down" -> 5, "Left" -> 5, "Right" -> 5)
-    var controller = new Controller(grid, player, obstacles, target, allowedMoves)
+    var controller = new Controller().generate_level("level00")
     val tui = new Tui(controller)
     gameLoop(controller, tui)
 
