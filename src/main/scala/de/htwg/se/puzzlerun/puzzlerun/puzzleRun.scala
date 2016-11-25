@@ -63,7 +63,7 @@ object puzzleRun {
   }
   def main(args: Array[String]): Unit = {
 
-    var controller = new Controller().generate_level("level00")
+    var controller = new Controller("level00.config")
     val tui = new Tui(controller)
     gameLoop(controller, tui)
 

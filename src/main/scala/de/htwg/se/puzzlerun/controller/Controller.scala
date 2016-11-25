@@ -4,22 +4,19 @@ import java.io.InputStream
 import java.util.Properties
 import java.io.FileInputStream
 
-import com.sun.prism.impl.Disposer
 import de.htwg.se.puzzlerun.model._
 
 import scala.collection.mutable.Map
 import de.htwg.se.puzzlerun.util.Observable
 
-import scala.io.Source
-
 class Controller(path: String) extends Observable {
   var state = 0 // 0 = Continue; 1 = Defeat 2 = Victory
-  var grid: Grid
-  var player: Player
-  var target: Target
-  var obstacles: List[Obstacle]
-  var allowedMoves: Map[String, Int]
 
+  var grid: Grid = _
+  var obstacles =  scala.collection.mutable.MutableList[Obstacle]()
+  var target: Target =_
+  var player: Player = _
+  var moves: Map[String, Int] = _
   generate_level(path)
   wrap()
 
@@ -134,20 +131,26 @@ class Controller(path: String) extends Observable {
 
   def generate_level(path: String): Unit={
     var prop: Properties = new Properties()
-    val filename: String = "/Users/kmg/projects/puzzlerun/src/levels/level00.config"
+    val filename: String = "/Users/kmg/projects/puzzlerun/src/levels/" + path
     val is: InputStream =  new FileInputStream(filename)
 
     prop.load(is)
 
     var grid_size = prop.getProperty("grid").split(",")
-    val grid = Grid(grid_size(0).toInt, grid_size(1).toInt)
+    this.grid = Grid(grid_size(0).toInt, grid_size(1).toInt)
 
-    var player_coord = prop.getProperty("player").split(",")
-    val player = Player(player_coord(0).toInt, player_coord(1).toInt)
+    val playerCoord = prop.getProperty("player").split(",")
+    this.player = Player(playerCoord(0).toInt, playerCoord(1).toInt)
 
     var target_coord = prop.getProperty("target").split(",")
-    val target = Target(target_coord(0).toInt, target_coord(1).toInt)
+    this.target = Target(target_coord(0).toInt, target_coord(1).toInt)
 
-
+    var obstacles_list = prop.getProperty("obstacles").split(" ")
+    for(entry <- obstacles_list){
+      var buffer = entry.split(",")
+      this.obstacles += Obstacle(buffer(0).toInt, buffer(1).toInt)
+    }
+    var moves_list = prop.getProperty("moves").split(" ")
+    this.moves = Map("Up"->moves_list(0).toInt, "Down"->moves_list(1).toInt, "Left"->moves_list(2).toInt, "Right"->moves_list(3).toInt)
   }
 }
