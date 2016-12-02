@@ -10,7 +10,7 @@ import scala.collection.mutable.Map
 import de.htwg.se.puzzlerun.util.Observable
 
 class Controller(path: String) extends Observable {
-  var state = 0 // 0 = Continue; 1 = Defeat 2 = Victory
+  var state = ""
 
   var grid: Grid = _
   var obstacles =  scala.collection.mutable.MutableList[Obstacle]()
@@ -103,14 +103,14 @@ class Controller(path: String) extends Observable {
      */
     try {
       if (grid.getCell(x, y).isInstanceOf[Obstacle]) {
-        state = 1
+        state = "Obstacle reached"
       } else if (grid.getCell(x, y).isInstanceOf[Target]) {
-        state = 2
+        state = "Target reached"
       } else {
-        state = 0
+        state = "Not reached"
       }
     } catch {
-      case bound: java.lang.ArrayIndexOutOfBoundsException => state = 1
+      case bound: java.lang.ArrayIndexOutOfBoundsException => state = "Obstacle reached"
     }
   }
 
@@ -118,7 +118,7 @@ class Controller(path: String) extends Observable {
     /*
     Checks whether the player has exceeded the moves limit.
      */
-    if (amount == 0) state = 3
+    if (amount == 0) state = "Moves depleted"
     var newAmount = amount - 1
     if (newAmount < 0) newAmount = 0 // Keep moves at 0 and don't go negative
     newAmount

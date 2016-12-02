@@ -15,28 +15,28 @@ import scala.io.StdIn._
 object puzzleRun {
 
   def gameLoop(controller: Controller, tui: Tui): Unit = {
-    tui.draw();
+    tui.draw()
     print("\n")
 
     val loop = new Breaks
     loop.breakable {
       while (true) {
         var eingabeLength = tui.input()
-        print("\n" + "Eingabelänge: " + eingabeLength + "\n")
+        //print("\n" + "Eingabelänge: " + eingabeLength + "\n")
 
         controller.state match {
-          case 0 =>
+          case "Not reached" =>
             if (controller.checkEingabeLength(eingabeLength)) {
               tui.defeat("Du bist nicht am Ziel angekommen.")
               loop.break
             }
-          case 1 =>
+          case "Obstacle reached" =>
             tui.defeat("Du bist auf ein Hindernis gestossen oder bist vom Spielfeld gekommen.")
             loop.break
-          case 2 =>
+          case "Target reached" =>
             tui.victory()
             loop.break
-          case 3 =>
+          case "Moves depleted" =>
             tui.defeat("Du hast keine Moves mehr.")
             loop.break
         }

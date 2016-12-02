@@ -57,15 +57,15 @@ case class Tui(var c: Controller) extends Observer {
        }
 
        this.c.state match {
-         case 0 =>
+         case "Not reached" =>
            if (this.c.checkEingabeLength(eingabeLength)) {
              loop.break
            }
-         case 1 =>
+         case "Obstacle reached" =>
            loop.break
-         case 2 =>
+         case "Target reached" =>
            loop.break
-         case 3 =>
+         case "Moves depleted" =>
            loop.break
        }
      }
