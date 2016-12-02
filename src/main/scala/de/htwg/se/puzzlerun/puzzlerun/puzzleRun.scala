@@ -27,20 +27,16 @@ object puzzleRun {
         controller.state match {
           case 0 =>
             if (controller.checkEingabeLength(eingabeLength)) {
-              controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n"))
               tui.defeat("Du bist nicht am Ziel angekommen.")
               loop.break
             }
           case 1 =>
-            controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
             tui.defeat("Du bist auf ein Hindernis gestossen oder bist vom Spielfeld gekommen.")
             loop.break
           case 2 =>
-            controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
             tui.victory()
             loop.break
           case 3 =>
-            controller.moves.map(key => print(key._1 + "\t" + key._2 + "\n\n"))
             tui.defeat("Du hast keine Moves mehr.")
             loop.break
         }

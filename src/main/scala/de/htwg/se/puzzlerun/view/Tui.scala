@@ -21,9 +21,12 @@ case class Tui(var c: Controller) extends Observer {
       for (j <- field(0).indices) {
         print(field(i)(j) + "\t")
       }
-      if(i == field.length / 2)
-        print(this.c.moves.get("Up") + "|" + this.c.moves.get("Down")+"|" + this.c.moves.get("Left")+"|" + this.c.moves.get("Right"))
-      print("\n")
+      if(i == field.length / 2) {
+        var format = "%-"+size*2+"s%-"+size*2+"s%-"+size*3+"s%-"+size+"s\n"
+        printf(format, this.c.moves.get("Up").get, this.c.moves.get("Down").get , this.c.moves.get("Left").get, this.c.moves.get("Right").get)
+
+      }
+        print("\n")
     }
     Thread.sleep(1500)
   }
