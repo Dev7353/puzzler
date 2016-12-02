@@ -12,8 +12,19 @@ case class Tui(var c: Controller) extends Observer {
   def update = draw()
 
   def draw(): Unit = {
-    print(c.grid.toString)
-    print("____________________________\n")
+    var size = this.c.grid.grid.length
+    var format = "%-"+size*4+"s%-"+size*2+"s%-"+size*2+"s%-"+size*2+"s%"+size*2+"s\n"
+
+    printf(format, "Gamefield", "Up", "Down", "Left", "Right")
+    val field = this.c.grid.grid
+    for (i <- field.indices) {
+      for (j <- field(0).indices) {
+        print(field(i)(j) + "\t")
+      }
+      if(i == field.length / 2)
+        print(this.c.moves.get("Up") + "|" + this.c.moves.get("Down")+"|" + this.c.moves.get("Left")+"|" + this.c.moves.get("Right"))
+      print("\n")
+    }
     Thread.sleep(1500)
   }
 
@@ -56,7 +67,6 @@ case class Tui(var c: Controller) extends Observer {
        }
      }
    }
-
 
     eingabeLength
   }

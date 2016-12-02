@@ -15,16 +15,12 @@ import scala.io.StdIn._
 object puzzleRun {
 
   def gameLoop(controller: Controller, tui: Tui): Unit = {
-    print("hoch: \t\t w\n" +
-      "runter: \t s\n" +
-      "links: \t\t a\n" +
-      "rechts: \t d\n")
+    tui.draw();
     print("\n")
 
     val loop = new Breaks
     loop.breakable {
       while (true) {
-        tui.draw()
         var eingabeLength = tui.input()
         print("\n" + "Eingabelänge: " + eingabeLength + "\n")
 
