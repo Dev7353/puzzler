@@ -131,7 +131,8 @@ class Controller(path: String) extends Observable {
 
   def generate_level(path: String): Unit={
     var prop: Properties = new Properties()
-    val filename: String = "/Users/kmg/projects/puzzlerun/src/levels/" + path
+    def getCurrentDirectory = new java.io.File(".").getCanonicalPath
+    val filename: String = getCurrentDirectory + "/src/levels/" + path
     val is: InputStream =  new FileInputStream(filename)
 
     prop.load(is)
