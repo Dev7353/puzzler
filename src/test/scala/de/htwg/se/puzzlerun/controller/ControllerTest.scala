@@ -8,13 +8,7 @@ import scala.collection.mutable
  * Created by kmg on 18.11.16.
  */
 class ControllerTest extends WordSpec with Matchers {
-
-  val grid = Grid(4, 4)
-  val player = Player(3, 3)
-  val target = Target(0, 0)
-  val obstacles: List[Obstacle] = List(Obstacle(1, 1), Obstacle(2, 1), Obstacle(2, 0), Obstacle(3, 2), Obstacle(1, 3))
-  val allowedMoves = mutable.Map("Up" -> 5, "Down" -> 5, "Left" -> 5, "Right" -> 5)
-  var controller = new Controller(grid, player, obstacles, target, allowedMoves)
+  var controller = new Controller("level00.config")
 
   "CheckCell" should {
 
