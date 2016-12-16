@@ -1,12 +1,15 @@
-package de.htwg.se.puzzlerun.view
+package de.htwg.se.puzzlerun.view.ITui.Impl1
 
 import de.htwg.se.puzzlerun.controller._
 import de.htwg.se.puzzlerun.util._
+import de.htwg.se.puzzlerun.view.ITui.ITui
 
 import scala.io.StdIn._
 import scala.util.control.Breaks
 
-case class Tui(var c: Controller) extends Observer {
+
+
+case class Tui(var c: IController) extends Observer with ITui{
   c.add(this)
 
   def update = draw()

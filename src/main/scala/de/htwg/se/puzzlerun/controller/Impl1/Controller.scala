@@ -1,15 +1,15 @@
-package de.htwg.se.puzzlerun.controller
+package de.htwg.se.puzzlerun.controller.Impl1
 
-import java.io.InputStream
+import java.io.{FileInputStream, InputStream}
 import java.util.Properties
-import java.io.FileInputStream
 
+import de.htwg.se.puzzlerun.controller.IController
+import de.htwg.se.puzzlerun.model.Impl1._
 import de.htwg.se.puzzlerun.model._
 
 import scala.collection.mutable.Map
-import de.htwg.se.puzzlerun.util.Observable
 
-class Controller(path: String) extends Observable {
+class Controller(path: String) extends IController{
   var state = ""
 
   var grid: Grid = _
