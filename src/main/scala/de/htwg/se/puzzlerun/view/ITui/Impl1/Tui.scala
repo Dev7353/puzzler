@@ -1,20 +1,13 @@
-package de.htwg.se.puzzlerun.view
+package de.htwg.se.puzzlerun.view.ITui.Impl1
 
 import de.htwg.se.puzzlerun.controller._
 import de.htwg.se.puzzlerun.util._
+import de.htwg.se.puzzlerun.view.ITui.ITui
 
 import scala.io.StdIn._
 import scala.util.control.Breaks
 
-trait ITui {
 
-  def draw()
-  def input(): Int
-  def victory()
-  def defeat(message: String)
-}
-
-trait IGui
 
 case class Tui(var c: IController) extends Observer with ITui{
   c.add(this)

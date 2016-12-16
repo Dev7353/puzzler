@@ -1,7 +1,9 @@
 package de.htwg.se.puzzlerun.controller
 
-import de.htwg.se.puzzlerun.model.{ Grid, Obstacle, Player, Target }
+import de.htwg.se.puzzlerun.controller.Impl1.Controller
+import de.htwg.se.puzzlerun.model._
 import org.scalatest._
+
 import scala.collection.mutable
 
 /**

@@ -5,8 +5,10 @@ package de.htwg.se.puzzlerun.puzzlerun
 
 import scala.io.StdIn
 import de.htwg.se.puzzlerun.model._
-import de.htwg.se.puzzlerun.view.{ITui, Tui}
-import de.htwg.se.puzzlerun.controller.{Controller, IController}
+import de.htwg.se.puzzlerun.controller.IController
+import de.htwg.se.puzzlerun.controller.Impl1.Controller
+import de.htwg.se.puzzlerun.view.ITui.ITui
+import de.htwg.se.puzzlerun.view.ITui.Impl1.Tui
 
 import scala.util.control._
 import scala.collection.mutable.Map

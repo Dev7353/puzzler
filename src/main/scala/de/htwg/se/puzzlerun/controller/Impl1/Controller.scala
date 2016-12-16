@@ -1,27 +1,13 @@
-package de.htwg.se.puzzlerun.controller
+package de.htwg.se.puzzlerun.controller.Impl1
 
-import java.io.InputStream
+import java.io.{FileInputStream, InputStream}
 import java.util.Properties
-import java.io.FileInputStream
 
+import de.htwg.se.puzzlerun.controller.IController
+import de.htwg.se.puzzlerun.model.Impl1._
 import de.htwg.se.puzzlerun.model._
 
 import scala.collection.mutable.Map
-import de.htwg.se.puzzlerun.util.Observable
-
-trait IController extends Observable {
-
-  var grid: Grid
-  var moves: Map[String, Int]
-  var state: String
-  def wrap()
-  def move(x: Int, y: Int)
-  def up()
-  def down()
-  def right()
-  def left()
-  def checkEingabeLength(eingabeLength: Int): Boolean
-}
 
 class Controller(path: String) extends IController{
   var state = ""

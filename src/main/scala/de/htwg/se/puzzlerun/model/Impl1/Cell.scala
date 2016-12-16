@@ -1,10 +1,8 @@
 /**
  * Created by kimeng on 21.10.2016.
  */
-package de.htwg.se.puzzlerun.model
+package de.htwg.se.puzzlerun.model.Impl1
 
-trait ICell
-
-class Cell() extends ICell{
+class Cell(){
   override def toString: String = "-"
 }
