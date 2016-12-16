@@ -1,5 +1,6 @@
 package de.htwg.se.puzzlerun.model
 
+import de.htwg.se.puzzlerun.model.Impl1.Obstacle
 import org.scalatest._
 
 /**
