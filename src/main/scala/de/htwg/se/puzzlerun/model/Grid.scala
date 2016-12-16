@@ -3,7 +3,9 @@
  */
 package de.htwg.se.puzzlerun.model
 
-case class Grid(length: Int, height: Int) {
+trait IGrid
+
+case class Grid(length: Int, height: Int) extends IGrid{
   var grid = Array.ofDim[Cell](length, height)
   def getCell(x: Int, y: Int): Cell = {
     grid(x)(y)

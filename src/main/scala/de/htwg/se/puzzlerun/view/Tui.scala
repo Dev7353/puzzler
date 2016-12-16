@@ -6,7 +6,17 @@ import de.htwg.se.puzzlerun.util._
 import scala.io.StdIn._
 import scala.util.control.Breaks
 
-case class Tui(var c: Controller) extends Observer {
+trait ITui {
+
+  def draw()
+  def input(): Int
+  def victory()
+  def defeat(message: String)
+}
+
+trait IGui
+
+case class Tui(var c: IController) extends Observer with ITui{
   c.add(this)
 
   def update = draw()

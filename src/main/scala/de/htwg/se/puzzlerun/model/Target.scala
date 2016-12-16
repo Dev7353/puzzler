@@ -1,10 +1,8 @@
 package de.htwg.se.puzzlerun.model
 
-/**
- * Created by kmg on 28.10.16.
- */
+trait ITarget
 
-case class Target(x: Int, y: Int) extends Cell {
+case class Target(x: Int, y: Int) extends Cell with ITarget{
 
   val coordinate = (x, y)
 

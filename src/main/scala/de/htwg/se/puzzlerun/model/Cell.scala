@@ -3,6 +3,8 @@
  */
 package de.htwg.se.puzzlerun.model
 
-class Cell() {
+trait ICell
+
+class Cell() extends ICell{
   override def toString: String = "-"
 }

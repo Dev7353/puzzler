@@ -5,8 +5,8 @@ package de.htwg.se.puzzlerun.puzzlerun
 
 import scala.io.StdIn
 import de.htwg.se.puzzlerun.model._
-import de.htwg.se.puzzlerun.view.Tui
-import de.htwg.se.puzzlerun.controller.Controller
+import de.htwg.se.puzzlerun.view.{ITui, Tui}
+import de.htwg.se.puzzlerun.controller.{Controller, IController}
 
 import scala.util.control._
 import scala.collection.mutable.Map
@@ -14,7 +14,7 @@ import scala.io.StdIn._
 
 object puzzleRun {
 
-  def gameLoop(controller: Controller, tui: Tui): Unit = {
+  def gameLoop(controller: IController, tui: ITui): Unit = {
     tui.draw()
     print("\n")
 
@@ -55,8 +55,8 @@ object puzzleRun {
   }
   def main(args: Array[String]): Unit = {
 
-    var controller = new Controller("level00.config")
-    val tui = new Tui(controller)
+    var controller: IController = new Controller("level00.config")
+    val tui: ITui = Tui(controller)
     gameLoop(controller, tui)
 
   }
