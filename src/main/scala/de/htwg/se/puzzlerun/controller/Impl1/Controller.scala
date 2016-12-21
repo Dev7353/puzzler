@@ -5,7 +5,6 @@ import java.util.Properties
 
 import de.htwg.se.puzzlerun.controller.IController
 import de.htwg.se.puzzlerun.model.Impl1._
-import de.htwg.se.puzzlerun.model._
 
 import scala.collection.mutable.Map
 

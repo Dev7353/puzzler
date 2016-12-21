@@ -6,16 +6,11 @@ import de.htwg.se.puzzlerun.controller.IController
 import de.htwg.se.puzzlerun.util._
 import de.htwg.se.puzzlerun.view.IGui.IGui
 
-import swing._
+import scala.swing._
 
-case class Gui(var c: IController) extends Observer with IGui{
+class Gui extends MainFrame {
 
-
-  def update = draw()
-
-
-
-  def draw(): Unit ={
-
-  }
+  title = "Puzzlrun"
+  preferredSize = new Dimension(320, 240)
+  contents = new Label("hier könnte Ihre Werbung stehen.")
 }

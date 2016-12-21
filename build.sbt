@@ -5,7 +5,7 @@ scalaVersion  := "2.11.8"
 scalacOptions := Seq("-unchecked", "-feature", "-deprecation", "-encoding", "utf8")
 
 resolvers += Resolver.jcenterRepo
-libraryDependencies += "org.scala-lang" % "scala-swing" % "2.10+"
+libraryDependencies += "org.scala-lang" % "scala-swing" % "2.11+"
 libraryDependencies ++= {
   val scalaTestV       = "3.0.0-M15"
   val scalaMockV       = "3.2.2"

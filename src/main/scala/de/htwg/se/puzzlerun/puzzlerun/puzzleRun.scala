@@ -3,16 +3,16 @@
  */
 package de.htwg.se.puzzlerun.puzzlerun
 
-import scala.io.StdIn
-import de.htwg.se.puzzlerun.model._
 import de.htwg.se.puzzlerun.controller.IController
 import de.htwg.se.puzzlerun.controller.Impl1.Controller
 import de.htwg.se.puzzlerun.view.ITui.ITui
 import de.htwg.se.puzzlerun.view.ITui.Impl1.Tui
+import de.htwg.se.puzzlerun.view.IGui.IGui
+import de.htwg.se.puzzlerun.view.IGui.Impl1.Gui
 
 import scala.util.control._
-import scala.collection.mutable.Map
 import scala.io.StdIn._
+import scala.swing._
 
 object puzzleRun {
 
@@ -59,9 +59,12 @@ object puzzleRun {
 
     var controller: IController = new Controller("level00.config")
     val tui: ITui = Tui(controller)
+    val gui = new Gui
+    gui.visible = true
     gameLoop(controller, tui)
 
   }
+
 
 }
 
