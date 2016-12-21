@@ -59,7 +59,7 @@ object puzzleRun {
 
     var controller: IController = new Controller("level00.config")
     val tui: ITui = Tui(controller)
-    val gui = new Gui
+    val gui = new Gui(controller)
     gui.visible = true
     gameLoop(controller, tui)
 
