@@ -12,7 +12,6 @@ import de.htwg.se.puzzlerun.view.IGui.Impl1.Gui
 
 import scala.util.control._
 import scala.io.StdIn._
-import scala.swing._
 
 object puzzleRun {
 
@@ -60,7 +59,6 @@ object puzzleRun {
     var controller: IController = new Controller("level00.config")
     val tui: ITui = Tui(controller)
     val gui = new Gui(controller)
-    gui.visible = true
     gameLoop(controller, tui)
 
   }
