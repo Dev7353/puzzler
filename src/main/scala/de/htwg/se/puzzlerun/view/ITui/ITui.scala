@@ -1,8 +1,8 @@
 package de.htwg.se.puzzlerun.view.ITui
 
 /**
-  * Created by kmg on 16.12.16.
-  */
+ * Created by kmg on 16.12.16.
+ */
 trait ITui {
 
   def draw()

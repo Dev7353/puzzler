@@ -1,5 +1,5 @@
 package de.htwg.se.puzzlerun.view.IGui
-trait IGui{
+trait IGui {
 
   def draw()
 }

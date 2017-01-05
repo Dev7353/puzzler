@@ -3,7 +3,7 @@
  */
 package de.htwg.se.puzzlerun.model.Impl1
 
-case class Grid(length: Int, height: Int){
+case class Grid(length: Int, height: Int) {
   var grid = Array.ofDim[Cell](length, height)
   def getCell(x: Int, y: Int): Cell = {
     grid(x)(y)

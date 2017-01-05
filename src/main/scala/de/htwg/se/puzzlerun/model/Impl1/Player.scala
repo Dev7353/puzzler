@@ -3,8 +3,7 @@
  */
 package de.htwg.se.puzzlerun.model.Impl1
 
-
-case class Player(x: Int, y: Int) extends Cell{
+case class Player(x: Int, y: Int) extends Cell {
 
   var coordinate = (x, y)
 

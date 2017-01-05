@@ -1,6 +1,6 @@
 package de.htwg.se.puzzlerun.controller.Impl1
 
-import java.io.{FileInputStream, InputStream}
+import java.io.{ FileInputStream, InputStream }
 import java.util.Properties
 
 import de.htwg.se.puzzlerun.controller.IController
@@ -8,12 +8,12 @@ import de.htwg.se.puzzlerun.model.Impl1._
 
 import scala.collection.mutable.Map
 
-class Controller(path: String) extends IController{
+class Controller(path: String) extends IController {
   var state = ""
 
   var grid: Grid = _
-  var obstacles =  scala.collection.mutable.MutableList[Obstacle]()
-  var target: Target =_
+  var obstacles = scala.collection.mutable.MutableList[Obstacle]()
+  var target: Target = _
   var player: Player = _
   var moves: Map[String, Int] = _
   generate_level(path)
@@ -128,11 +128,11 @@ class Controller(path: String) extends IController{
     eingabeLength == 0
   }
 
-  def generate_level(path: String): Unit={
+  def generate_level(path: String): Unit = {
     var prop: Properties = new Properties()
     def getCurrentDirectory = new java.io.File(".").getCanonicalPath
     val filename: String = getCurrentDirectory + "/src/levels/" + path
-    val is: InputStream =  new FileInputStream(filename)
+    val is: InputStream = new FileInputStream(filename)
 
     prop.load(is)
 
@@ -146,11 +146,11 @@ class Controller(path: String) extends IController{
     this.target = Target(target_coord(0).toInt, target_coord(1).toInt)
 
     var obstacles_list = prop.getProperty("obstacles").split(" ")
-    for(entry <- obstacles_list){
+    for (entry <- obstacles_list) {
       var buffer = entry.split(",")
       this.obstacles += Obstacle(buffer(0).toInt, buffer(1).toInt)
     }
     var moves_list = prop.getProperty("moves").split(" ")
-    this.moves = Map("Up"->moves_list(0).toInt, "Down"->moves_list(1).toInt, "Left"->moves_list(2).toInt, "Right"->moves_list(3).toInt)
+    this.moves = Map("Up" -> moves_list(0).toInt, "Down" -> moves_list(1).toInt, "Left" -> moves_list(2).toInt, "Right" -> moves_list(3).toInt)
   }
 }

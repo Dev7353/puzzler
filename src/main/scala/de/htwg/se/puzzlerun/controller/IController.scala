@@ -5,10 +5,10 @@ import de.htwg.se.puzzlerun.util.Observable
 import scala.collection.mutable.Map
 
 /**
-  * Created by kmg on 16.12.16.
-  */
+ * Created by kmg on 16.12.16.
+ */
 
-trait IController extends Observable{
+trait IController extends Observable {
 
   var grid: Grid
   var moves: Map[String, Int]
