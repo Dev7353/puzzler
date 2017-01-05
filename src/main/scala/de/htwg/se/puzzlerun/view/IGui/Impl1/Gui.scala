@@ -29,6 +29,14 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
   contents = new BorderPanel {
     add(gridPanel, BorderPanel.Position.Center)
   }
+
+  menuBar = new MenuBar {
+
+      contents += new MenuItem(Action("Quit") {
+        System.exit(0)
+      })
+    }
+  }
   visible = true
   def update = draw()
 
