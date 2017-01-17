@@ -1,14 +1,15 @@
 package de.htwg.se.puzzlerun.controller.Impl1
 
-import java.io.{ FileInputStream, InputStream }
+import java.io.{FileInputStream, InputStream}
 import java.util.Properties
 
 import de.htwg.se.puzzlerun.controller.IController
 import de.htwg.se.puzzlerun.model.Impl1._
 
 import scala.collection.mutable.Map
+import scala.swing.Publisher
 
-class Controller(path: String) extends IController {
+class Controller(path: String) extends IController with Publisher {
   var state = ""
 
   var grid: Grid = _

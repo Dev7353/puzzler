@@ -9,7 +9,6 @@ import scala.util.control.Breaks
 
 case class Tui(var c: IController) extends Observer with ITui {
   c.add(this)
-
   def update = draw()
 
   def draw(): Unit = {
