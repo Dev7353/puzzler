@@ -11,6 +11,7 @@ import scala.collection.mutable.Map
 trait IController extends Observable {
 
   var grid: Grid
+  var level: Int
   var moves: Map[String, Int]
   var state: String
   def wrap()

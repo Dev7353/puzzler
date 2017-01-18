@@ -23,7 +23,7 @@ object puzzleRun {
     loop.breakable {
       while (true) {
         var eingabeLength = tui.input()
-        
+
       }
     }
 

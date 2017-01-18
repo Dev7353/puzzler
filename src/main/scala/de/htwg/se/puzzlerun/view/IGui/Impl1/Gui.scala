@@ -18,17 +18,16 @@ import BorderPanel.Position._
 class Gui(var c: IController) extends MainFrame with Observer with IGui {
 
   var fields = Array.ofDim[BoxPanel](c.grid.height, c.grid.length)
-  val tf = new TextField(columns = 10)
 
   var up = new Label("Up \n" + c.moves.get("Up").get)
   var down = new Label("Down " + c.moves.get("Down").get)
   var right = new Label("Right " + c.moves.get("Right").get)
   var left = new Label("Left " + c.moves.get("Left").get)
 
-  var btn_up = new Button("Up")
-  var btn_down = new Button("Down")
-  var btn_right = new Button("Right")
-  var btn_left = new Button("Left")
+  var btn_up = new Button("" + up.text)
+  var btn_down = new Button("" + down.text)
+  var btn_right = new Button("" + right.text)
+  var btn_left = new Button("" + left.text)
 
   for {
     row <- 0 until c.grid.length
@@ -67,7 +66,7 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
 
   def titleBox = new BoxPanel(Orientation.Horizontal) {
 
-    contents += new Label("LEVEL 0")
+    contents += new Label("LEVEL " + c.level)
     //serialisierung
   }
 
@@ -100,30 +99,11 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
     add(directions, Center)
   }
 
-  def bla = new GridPanel(1, 4) {
-
-    contents += up
-    contents += down
-    contents += right
-    contents += left
-
-  }
-
-
 
   contents = new BorderPanel {
     add(titleBox, North)
     add(grid, Center)
     add(control, East)
-    add(bla, West)
-  }
-
-  listenTo(tf)
-  for {
-    row <- 0 until c.grid.length
-    col <- 0 until c.grid.height
-  } {
-    listenTo(fields(row)(col))
   }
 
   listenTo(up)
@@ -139,16 +119,16 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
 
   reactions += {
     case ButtonClicked(b) =>
-      if(b.text.equals("Up")){
+      if(b.text.contains("Up")){
         c.up()
       }
-      else if(b.text.equals("Down")){
+      else if(b.text.contains("Down")){
         c.down()
       }
-      else if(b.text.equals("Right")){
+      else if(b.text.contains("Right")){
         c.right()
       }
-      else if(b.text.equals("Left")){
+      else if(b.text.contains("Left")){
         c.left()
       }
 

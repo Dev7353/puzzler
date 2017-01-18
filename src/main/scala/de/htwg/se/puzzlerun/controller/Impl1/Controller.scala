@@ -11,7 +11,7 @@ import scala.swing.Publisher
 
 class Controller(path: String) extends IController with Publisher {
   var state = ""
-
+  var level = 0
   var grid: Grid = _
   var obstacles = scala.collection.mutable.MutableList[Obstacle]()
   var target: Target = _
@@ -106,6 +106,7 @@ class Controller(path: String) extends IController with Publisher {
         state = "Obstacle reached"
       } else if (grid.getCell(x, y).isInstanceOf[Target]) {
         state = "Target reached"
+        //generate_level("level01.config")
       }
 
     } catch {

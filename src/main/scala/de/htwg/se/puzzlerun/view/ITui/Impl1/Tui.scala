@@ -9,6 +9,7 @@ import scala.swing.Dialog
 import scala.util.control.Breaks
 
 case class Tui(var c: IController) extends Observer with ITui {
+  var current_level = 0
   c.add(this)
   def update = draw()
 
@@ -31,6 +32,9 @@ case class Tui(var c: IController) extends Observer with ITui {
     }
     if(c.state.equals("Target reached")){
       println("Congrats Pal :)")
+      if(c.level > current_level){
+       //draw()
+      }
     }
     else if(c.state.equals("Obstacle reached")){
       println("Well, that was bad.")
