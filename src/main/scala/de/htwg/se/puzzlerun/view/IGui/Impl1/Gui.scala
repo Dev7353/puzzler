@@ -19,15 +19,15 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
 
   var fields = Array.ofDim[BoxPanel](c.grid.height, c.grid.length)
 
-  var up = new Label("Up \n" + c.moves.get("Up").get)
-  var down = new Label("Down " + c.moves.get("Down").get)
-  var right = new Label("Right " + c.moves.get("Right").get)
-  var left = new Label("Left " + c.moves.get("Left").get)
+  var up = "Up " + c.moves.get("Up").get
+  var down = "Down " + c.moves.get("Down").get
+  var right ="Right " + c.moves.get("Right").get
+  var left = "Left " + c.moves.get("Left").get
 
-  var btn_up = new Button("" + up.text)
-  var btn_down = new Button("" + down.text)
-  var btn_right = new Button("" + right.text)
-  var btn_left = new Button("" + left.text)
+  var btn_up = new Button("" + up)
+  var btn_down = new Button("" + down)
+  var btn_right = new Button("" + right)
+  var btn_left = new Button("" + left)
 
   for {
     row <- 0 until c.grid.length
@@ -106,11 +106,6 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
     add(control, East)
   }
 
-  listenTo(up)
-  listenTo(down)
-  listenTo(right)
-  listenTo(left)
-
   listenTo(btn_down)
   listenTo(btn_up)
   listenTo(btn_left)
@@ -121,15 +116,27 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
     case ButtonClicked(b) =>
       if(b.text.contains("Up")){
         c.up()
+        btn_up.text = "Up " + c.moves.get("Up").get
+        if(c.moves.get("Up").get == 0)
+          btn_up.enabled = false
       }
       else if(b.text.contains("Down")){
         c.down()
+        btn_down.text = "Down " + c.moves.get("Down").get
+        if(c.moves.get("Down").get == 0)
+          btn_down.enabled = false
       }
       else if(b.text.contains("Right")){
         c.right()
+        btn_right.text = "Right " + c.moves.get("Right").get
+        if(c.moves.get("Right").get == 0)
+          btn_right.enabled = false
       }
       else if(b.text.contains("Left")){
         c.left()
+        btn_left.text = "Left " + c.moves.get("Left").get
+        if(c.moves.get("Left").get == 0)
+          btn_left.enabled = false
       }
 
       if(c.state.equals("Target reached")){
@@ -179,11 +186,6 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
       fields(row)(col).repaint
       fields(row)(col).revalidate()
     }
-
-    up.text = "Up " + c.moves.get("Up").get
-    down.text = "Down " + c.moves.get("Down").get
-    right.text = "Right " + c.moves.get("Right").get
-    left.text = "Left " + c.moves.get("Left").get
 
     this.repaint()
   }

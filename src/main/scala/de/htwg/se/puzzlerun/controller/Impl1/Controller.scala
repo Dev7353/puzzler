@@ -56,6 +56,8 @@ class Controller(path: String) extends IController with Publisher {
     Moves the player one field up.
      */
     val y = this.player.coordinate._2
+    if(this.player.coordinate._1 - 1 < 0)
+      return
     val x = this.player.coordinate._1 - 1
     move(x, y)
     val newAmount = checkMoves(moves.get("Up").get)
@@ -68,7 +70,10 @@ class Controller(path: String) extends IController with Publisher {
     Moves the player one field down.
      */
     val y = this.player.coordinate._2
+    if(this.player.coordinate._1 + 1 > grid.height-1)
+      return
     val x = this.player.coordinate._1 + 1
+
     move(x, y)
     val newAmount = checkMoves(moves.get("Down").get)
     moves.put("Down", newAmount)
@@ -78,6 +83,8 @@ class Controller(path: String) extends IController with Publisher {
     /*
     Moves the player one field to the right.
      */
+    if(this.player.coordinate._2 + 1 > grid.length-1)
+      return
     val y = this.player.coordinate._2 + 1
     val x = this.player.coordinate._1
     move(x, y)
@@ -89,6 +96,8 @@ class Controller(path: String) extends IController with Publisher {
     /*
     Moves the player one field to the left
      */
+    if(this.player.coordinate._2 - 1 < 0)
+      return
     val y = this.player.coordinate._2 - 1
     val x = this.player.coordinate._1
     move(x, y)
@@ -106,7 +115,11 @@ class Controller(path: String) extends IController with Publisher {
         state = "Obstacle reached"
       } else if (grid.getCell(x, y).isInstanceOf[Target]) {
         state = "Target reached"
+
         //generate_level("level01.config")
+      }
+      else{
+        state = ""
       }
 
     } catch {

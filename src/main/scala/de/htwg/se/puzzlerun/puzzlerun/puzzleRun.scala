@@ -7,7 +7,6 @@ import de.htwg.se.puzzlerun.controller.IController
 import de.htwg.se.puzzlerun.controller.Impl1.Controller
 import de.htwg.se.puzzlerun.view.ITui.ITui
 import de.htwg.se.puzzlerun.view.ITui.Impl1.Tui
-import de.htwg.se.puzzlerun.view.IGui.IGui
 import de.htwg.se.puzzlerun.view.IGui.Impl1.Gui
 
 import scala.util.control._
