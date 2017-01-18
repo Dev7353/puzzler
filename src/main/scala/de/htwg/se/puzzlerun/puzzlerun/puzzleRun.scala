@@ -23,24 +23,7 @@ object puzzleRun {
     loop.breakable {
       while (true) {
         var eingabeLength = tui.input()
-        //print("\n" + "Eingabelänge: " + eingabeLength + "\n")
-
-        controller.state match {
-          case "Not reached" =>
-            if (controller.checkEingabeLength(eingabeLength)) {
-              tui.defeat("Du bist nicht am Ziel angekommen.")
-              loop.break
-            }
-          case "Obstacle reached" =>
-            tui.defeat("Du bist auf ein Hindernis gestossen oder bist vom Spielfeld gekommen.")
-            loop.break
-          case "Target reached" =>
-            tui.victory()
-            loop.break
-          case "Moves depleted" =>
-            tui.defeat("Du hast keine Moves mehr.")
-            loop.break
-        }
+        
       }
     }
 

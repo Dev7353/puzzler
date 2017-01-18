@@ -106,9 +106,8 @@ class Controller(path: String) extends IController with Publisher {
         state = "Obstacle reached"
       } else if (grid.getCell(x, y).isInstanceOf[Target]) {
         state = "Target reached"
-      } else {
-        state = "Not reached"
       }
+
     } catch {
       case bound: java.lang.ArrayIndexOutOfBoundsException => state = "Obstacle reached"
     }

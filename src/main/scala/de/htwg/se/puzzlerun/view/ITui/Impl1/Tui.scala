@@ -5,6 +5,7 @@ import de.htwg.se.puzzlerun.util._
 import de.htwg.se.puzzlerun.view.ITui.ITui
 
 import scala.io.StdIn._
+import scala.swing.Dialog
 import scala.util.control.Breaks
 
 case class Tui(var c: IController) extends Observer with ITui {
@@ -28,7 +29,16 @@ case class Tui(var c: IController) extends Observer with ITui {
       }
       print("\n")
     }
-    Thread.sleep(1500)
+    if(c.state.equals("Target reached")){
+      println("Congrats Pal :)")
+    }
+    else if(c.state.equals("Obstacle reached")){
+      println("Well, that was bad.")
+    }
+    else if(c.state.equals("Moves depleted")){
+      println("No more moves left!")
+    }
+    Thread.sleep(200)
   }
 
   def input(): Int = {
@@ -54,19 +64,6 @@ case class Tui(var c: IController) extends Observer with ITui {
           case _ =>
             print("Falsche Eingabe. Wird ignoriert.\n")
             eingabeLength -= 1
-        }
-
-        this.c.state match {
-          case "Not reached" =>
-            if (this.c.checkEingabeLength(eingabeLength)) {
-              loop.break
-            }
-          case "Obstacle reached" =>
-            loop.break
-          case "Target reached" =>
-            loop.break
-          case "Moves depleted" =>
-            loop.break
         }
       }
     }
