@@ -148,6 +148,15 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
         grid.contents += fields(row)(col)
       }
 
+      btn_up.enabled = true
+      btn_down.enabled = true
+      btn_right.enabled = true
+      btn_left.enabled = true
+
+      btn_up.text = "Up " + c.moves.get("Up").get
+      btn_down.text = "Down " + c.moves.get("Down").get
+      btn_right.text = "Right " + c.moves.get("Right").get
+      btn_left.text = "Left " + c.moves.get("Left").get
 
     }
     for {

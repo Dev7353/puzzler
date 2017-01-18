@@ -47,6 +47,8 @@ class Controller(path: String) extends IController with Publisher {
     checkCell(x, y)
     this.grid.setCell(player.x, player.y, new Cell)
     player.coordinate = (x, y)
+    if(state.equals("Target reached"))
+      generate_level("level0"+level+".config")
     wrap()
     notifyObservers
   }
@@ -116,7 +118,6 @@ class Controller(path: String) extends IController with Publisher {
       } else if (grid.getCell(x, y).isInstanceOf[Target]) {
         state = "Target reached"
         level += 1
-        generate_level("level0"+level+".config")
 
       }
       else{
