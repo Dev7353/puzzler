@@ -32,9 +32,7 @@ case class Tui(var c: IController) extends Observer with ITui {
     }
     if(c.state.equals("Target reached")){
       println("Congrats Pal :)")
-      if(c.level > current_level){
-       //draw()
-      }
+
     }
     else if(c.state.equals("Obstacle reached")){
       println("Well, that was bad.")
@@ -65,6 +63,7 @@ case class Tui(var c: IController) extends Observer with ITui {
           case 'd' =>
             this.c.right()
             eingabeLength -= 1
+          case 'q' => sys.exit()
           case _ =>
             print("Falsche Eingabe. Wird ignoriert.\n")
             eingabeLength -= 1

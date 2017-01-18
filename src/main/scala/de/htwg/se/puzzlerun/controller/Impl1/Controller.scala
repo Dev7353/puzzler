@@ -115,8 +115,9 @@ class Controller(path: String) extends IController with Publisher {
         state = "Obstacle reached"
       } else if (grid.getCell(x, y).isInstanceOf[Target]) {
         state = "Target reached"
+        level += 1
+        generate_level("level0"+level+".config")
 
-        //generate_level("level01.config")
       }
       else{
         state = ""

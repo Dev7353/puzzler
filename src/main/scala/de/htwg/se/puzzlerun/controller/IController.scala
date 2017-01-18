@@ -21,4 +21,5 @@ trait IController extends Observable {
   def right()
   def left()
   def checkEingabeLength(eingabeLength: Int): Boolean
+  def generate_level(path: String)
 }

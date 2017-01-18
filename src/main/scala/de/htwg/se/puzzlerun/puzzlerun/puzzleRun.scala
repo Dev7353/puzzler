@@ -21,7 +21,7 @@ object puzzleRun {
     val loop = new Breaks
     loop.breakable {
       while (true) {
-        var eingabeLength = tui.input()
+        tui.input()
 
       }
     }
@@ -31,9 +31,9 @@ object puzzleRun {
 
     eingabe match {
 
-      case "j" => main(args = new Array[String](3))
+      case "y" => main(args = new Array[String](3))
       case "n" => return
-      case default => print("Input not recognized. Please put in 'j' or 'n")
+      case default => print("Input not recognized. Please put in 'y' or 'n")
     }
   }
   def main(args: Array[String]): Unit = {
