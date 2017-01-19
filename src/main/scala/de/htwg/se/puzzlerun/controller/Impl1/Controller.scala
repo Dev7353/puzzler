@@ -153,7 +153,7 @@ class Controller(path: String) extends IController with Publisher {
 
     val sg: ParseStrategy = new TextParser
     val sg2: ParseStrategy = new JsonParser
-    val context = new Context(sg2, this)
+    val context = new Context(sg, this)
     context.execute(path)
   }
   def generateJSONLevel(path: String): Unit = {

@@ -3,16 +3,14 @@
  */
 package de.htwg.se.puzzlerun.view.IGui.Impl1
 
-import scala.util.control.Breaks
 import javax.swing.ImageIcon
 
 import de.htwg.se.puzzlerun.controller.IController
 import de.htwg.se.puzzlerun.util._
 import de.htwg.se.puzzlerun.view.IGui.IGui
 
-import scala.swing.{ BorderPanel, BoxPanel, _ }
-import scala.swing.event.{ ButtonClicked, Key, KeyPressed }
-
+import scala.swing.{BorderPanel, BoxPanel, _}
+import scala.swing.event.{ButtonClicked, Key, KeyPressed}
 import BorderPanel.Position._
 
 class Gui(var c: IController) extends MainFrame with Observer with IGui {
@@ -45,10 +43,18 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
 
   title = "Puzzlrun"
 
-  def titleBox = new BoxPanel(Orientation.Horizontal) {
+  menuBar = new MenuBar{
+    contents += new Menu("Puzzlerun"){
 
+      contents += new MenuItem(Action("about"){Dialog.showMessage(null, "Puzzlerun 1.0", title = "You pressed me")})
+      contents += new Separator
+      contents += new MenuItem(Action("quit"){sys.exit()})
+
+    }
+  }
+
+  def titleBox = new BoxPanel(Orientation.Horizontal) {
     contents += lbl_level
-    //serialisierung
   }
 
   var grid = new GridPanel(c.grid.length, c.grid.height) {

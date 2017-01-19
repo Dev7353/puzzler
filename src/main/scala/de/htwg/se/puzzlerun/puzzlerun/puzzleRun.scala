@@ -40,7 +40,7 @@ object puzzleRun {
   }
   def main(args: Array[String]): Unit = {
 
-    var controller: IController = new Controller("level00.json")
+    var controller: IController = new Controller("level00.config")
     val tui: ITui = Tui(controller)
     val gui = new Gui(controller)
     gameLoop(controller, tui)
