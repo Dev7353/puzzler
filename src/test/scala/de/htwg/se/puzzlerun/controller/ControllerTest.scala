@@ -14,27 +14,27 @@ class ControllerTest extends WordSpec with Matchers {
 
   "CheckCell" should {
 
-    "set state to 1" in {
+    "set state to 'Obstacle reached'" in {
 
       controller.checkCell(1, 1)
-      assert(controller.state == 1)
+      assert(controller.state.equals("Obstacle reached"))
 
       controller.checkCell(5, 5)
-      assert(controller.state == 1)
+      assert(controller.state.equals("Obstacle reached"))
 
     }
 
-    "set state to 2" in {
+    "set state to 'Target reached'" in {
 
       controller.checkCell(0, 0)
-      assert(controller.state == 2)
+      assert(controller.state.equals("Target reached"))
 
     }
 
-    "set state to 0" in {
+    "set state to ''" in {
 
       controller.checkCell(1, 0)
-      assert(controller.state == 0)
+      assert(controller.state.equals(""))
 
     }
   }
@@ -43,8 +43,8 @@ class ControllerTest extends WordSpec with Matchers {
 
     "set player to coordinate" in {
 
-      controller.move(1, 0);
-      assert(controller.player.coordinate == (1, 0))
+      controller.move(1, 1);
+      assert(controller.player.coordinate == (1, 1))
     }
   }
 
@@ -98,7 +98,6 @@ class ControllerTest extends WordSpec with Matchers {
 
       assert((yb - ya) == 1)
       assert((xb - xa) == 0)
-
       assert(controller.moves.exists(_ == "Left" -> 4))
     }
 
@@ -127,12 +126,12 @@ class ControllerTest extends WordSpec with Matchers {
     "returns 0" in {
 
       assert(controller.checkMoves(1) == 0)
-      assert(controller.state != 3)
+      assert(!controller.state.equals("Moves depleted"))
     }
 
     "returns 0 and set state to 3" in {
       assert(controller.checkMoves(0) == 0)
-      assert(controller.state == 3)
+      assert(controller.state.equals("Moves depleted"))
     }
 
   }

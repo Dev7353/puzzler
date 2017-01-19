@@ -1,6 +1,6 @@
 package de.htwg.se.puzzlerun.controller.Impl1
 
-import java.io.{FileInputStream, InputStream}
+import java.io.{ FileInputStream, InputStream }
 import java.util.Properties
 
 import de.htwg.se.puzzlerun.controller.IController
@@ -47,8 +47,8 @@ class Controller(path: String) extends IController with Publisher {
     checkCell(x, y)
     this.grid.setCell(player.x, player.y, new Cell)
     player.coordinate = (x, y)
-    if(state.equals("Target reached"))
-      generate_level("level0"+level+".config")
+    if (state.equals("Target reached"))
+      generate_level("level0" + level + ".config")
     wrap()
     notifyObservers
   }
@@ -58,7 +58,7 @@ class Controller(path: String) extends IController with Publisher {
     Moves the player one field up.
      */
     val y = this.player.coordinate._2
-    if(this.player.coordinate._1 - 1 < 0)
+    if (this.player.coordinate._1 - 1 < 0)
       return
     val x = this.player.coordinate._1 - 1
     move(x, y)
@@ -72,7 +72,7 @@ class Controller(path: String) extends IController with Publisher {
     Moves the player one field down.
      */
     val y = this.player.coordinate._2
-    if(this.player.coordinate._1 + 1 > grid.height-1)
+    if (this.player.coordinate._1 + 1 > grid.height - 1)
       return
     val x = this.player.coordinate._1 + 1
 
@@ -85,7 +85,7 @@ class Controller(path: String) extends IController with Publisher {
     /*
     Moves the player one field to the right.
      */
-    if(this.player.coordinate._2 + 1 > grid.length-1)
+    if (this.player.coordinate._2 + 1 > grid.length - 1)
       return
     val y = this.player.coordinate._2 + 1
     val x = this.player.coordinate._1
@@ -98,7 +98,7 @@ class Controller(path: String) extends IController with Publisher {
     /*
     Moves the player one field to the left
      */
-    if(this.player.coordinate._2 - 1 < 0)
+    if (this.player.coordinate._2 - 1 < 0)
       return
     val y = this.player.coordinate._2 - 1
     val x = this.player.coordinate._1
@@ -119,8 +119,7 @@ class Controller(path: String) extends IController with Publisher {
         state = "Target reached"
         level += 1
 
-      }
-      else{
+      } else {
         state = ""
       }
 
@@ -145,17 +144,16 @@ class Controller(path: String) extends IController with Publisher {
   }
 
   def generate_level(path: String): Unit = {
-    import java.nio.file.{Paths, Files}
+    import java.nio.file.{ Paths, Files }
 
     var prop: Properties = new Properties()
     def getCurrentDirectory = new java.io.File(".").getCanonicalPath
     val filename: String = getCurrentDirectory + "/src/levels/" + path
-    if(!Files.exists(Paths.get(filename))){
+    if (!Files.exists(Paths.get(filename))) {
       level = -1
       return
     }
     val is: InputStream = new FileInputStream(filename)
-
 
     prop.load(is)
 

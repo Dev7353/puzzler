@@ -30,14 +30,12 @@ case class Tui(var c: IController) extends Observer with ITui {
       }
       print("\n")
     }
-    if(c.state.equals("Target reached")){
+    if (c.state.equals("Target reached")) {
       println("Congrats Pal :)")
 
-    }
-    else if(c.state.equals("Obstacle reached")){
+    } else if (c.state.equals("Obstacle reached")) {
       println("Well, that was bad. Good Luck next time.")
-    }
-    else if(c.state.equals("Moves depleted")){
+    } else if (c.state.equals("Moves depleted")) {
       println("No more moves left!")
     }
     Thread.sleep(200)
