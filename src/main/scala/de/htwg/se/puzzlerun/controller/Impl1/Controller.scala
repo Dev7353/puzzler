@@ -2,6 +2,7 @@ package de.htwg.se.puzzlerun.controller.Impl1
 
 import java.io._
 import java.util.Properties
+import javax.inject.Inject
 
 import de.htwg.se.puzzlerun.controller.IController
 import de.htwg.se.puzzlerun.model.Impl1._
@@ -13,8 +14,9 @@ import net.liftweb.json.JsonDSL._
 
 import scala.io.Source
 case class jsonLevel(grid: Grid, player: Player, target: Target, obstacles: List[Obstacle], moves: Map[String, Int])
-class Controller(path: String) extends IController with Publisher {
+class Controller @Inject() (path: String) extends IController with Publisher {
   implicit val formats = net.liftweb.json.DefaultFormats
+
   var state = ""
   var level = 0
   var grid: Grid = _
@@ -23,7 +25,8 @@ class Controller(path: String) extends IController with Publisher {
   var player: Player = _
   var moves: Map[String, Int] = _
   //parseJSONLevel(path)
-  generate_level(path)
+
+  generate_level("level00.config")
   wrap()
 
   def wrap(): Unit = {
@@ -150,13 +153,13 @@ class Controller(path: String) extends IController with Publisher {
   }
 
   def generate_level(path: String): Unit = {
-
     val sg: ParseStrategy = new TextParser
     val sg2: ParseStrategy = new JsonParser
     val context = new Context(sg, this)
     context.execute(path)
   }
   def generateJSONLevel(path: String): Unit = {
+
     def getCurrentDirectory = new java.io.File(".").getCanonicalPath
     val filename = path.substring(0, 7)
     val tempObstacle = this.obstacles.map(o => List(o.coordinate._1, o.coordinate._2))
