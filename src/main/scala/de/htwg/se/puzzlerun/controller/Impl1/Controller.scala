@@ -8,6 +8,8 @@ import de.htwg.se.puzzlerun.model.Impl1._
 
 import scala.collection.mutable.Map
 import scala.swing.Publisher
+import net.liftweb.json._
+import net.liftweb.json.JsonDSL._
 
 class Controller(path: String) extends IController with Publisher {
   var state = ""
@@ -175,5 +177,19 @@ class Controller(path: String) extends IController with Publisher {
     }
     var moves_list = prop.getProperty("moves").split(" ")
     this.moves = Map("Up" -> moves_list(0).toInt, "Down" -> moves_list(1).toInt, "Left" -> moves_list(2).toInt, "Right" -> moves_list(3).toInt)
+    generateJSONLevel()
   }
+  def generateJSONLevel(): Unit = {
+    val json =
+      "level" ->
+        ("grid" -> List(this.grid.height.toString, this.grid.length.toString)) ~
+          ("player" -> this.player.coordinate.toString) ~
+          ("target" -> this.target.coordinate.toString) ~
+          ("obstacles" -> this.obstacles.toString) ~
+          ("moves" -> this.moves)
+
+
+    println(compact(render(json)))
+  }
+
 }
