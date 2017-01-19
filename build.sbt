@@ -6,6 +6,7 @@ scalacOptions := Seq("-unchecked", "-feature", "-deprecation", "-encoding", "utf
 
 resolvers += Resolver.jcenterRepo
 libraryDependencies += "org.scala-lang" % "scala-swing" % "2.11+"
+libraryDependencies += "net.liftweb" %% "lift-json" % "2.6+"
 libraryDependencies += "net.codingwell" %% "scala-guice" % "4.1.0"
 libraryDependencies ++= {
   val scalaTestV       = "3.0.0-M15"

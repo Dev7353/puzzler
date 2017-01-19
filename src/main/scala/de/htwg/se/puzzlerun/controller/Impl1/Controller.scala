@@ -1,6 +1,6 @@
 package de.htwg.se.puzzlerun.controller.Impl1
 
-import java.io.{ FileInputStream, InputStream }
+import java.io._
 import java.util.Properties
 
 import de.htwg.se.puzzlerun.controller.IController
@@ -8,8 +8,13 @@ import de.htwg.se.puzzlerun.model.Impl1._
 
 import scala.collection.mutable.Map
 import scala.swing.Publisher
+import net.liftweb.json._
+import net.liftweb.json.JsonDSL._
 
+import scala.io.Source
+case class jsonLevel(grid: Grid, player: Player, target: Target, obstacles: List[Obstacle], moves: Map[String, Int])
 class Controller(path: String) extends IController with Publisher {
+  implicit val formats = net.liftweb.json.DefaultFormats
   var state = ""
   var level = 0
   var grid: Grid = _
@@ -17,6 +22,7 @@ class Controller(path: String) extends IController with Publisher {
   var target: Target = _
   var player: Player = _
   var moves: Map[String, Int] = _
+  //parseJSONLevel(path)
   generate_level(path)
   wrap()
 
@@ -144,34 +150,27 @@ class Controller(path: String) extends IController with Publisher {
   }
 
   def generate_level(path: String): Unit = {
-    import java.nio.file.{ Paths, Files }
 
-    var prop: Properties = new Properties()
+    val sg: ParseStrategy = new TextParser
+    val sg2: ParseStrategy = new JsonParser
+    val context = new Context(sg2, this)
+    context.execute(path)
+  }
+  def generateJSONLevel(path: String): Unit = {
     def getCurrentDirectory = new java.io.File(".").getCanonicalPath
-    val filename: String = getCurrentDirectory + "/src/levels/" + path
-    if (!Files.exists(Paths.get(filename))) {
-      level = -1
-      return
-    }
-    val is: InputStream = new FileInputStream(filename)
+    val filename = path.substring(0, 7)
+    val tempObstacle = this.obstacles.map(o => List(o.coordinate._1, o.coordinate._2))
+    val json =
+          ("grid" -> List(this.grid.height.toString, this.grid.length.toString)) ~
+          ("player" -> List(this.player.coordinate._1, this.player.coordinate._2)) ~
+          ("target" -> List(this.target.coordinate._1, this.target.coordinate._2)) ~
+          ("obstacles" -> tempObstacle) ~
+          ("moves" -> this.moves)
 
-    prop.load(is)
-
-    var grid_size = prop.getProperty("grid").split(",")
-    this.grid = Grid(grid_size(0).toInt, grid_size(1).toInt)
-
-    val playerCoord = prop.getProperty("player").split(",")
-    this.player = Player(playerCoord(0).toInt, playerCoord(1).toInt)
-
-    var target_coord = prop.getProperty("target").split(",")
-    this.target = Target(target_coord(0).toInt, target_coord(1).toInt)
-
-    var obstacles_list = prop.getProperty("obstacles").split(" ")
-    for (entry <- obstacles_list) {
-      var buffer = entry.split(",")
-      this.obstacles += Obstacle(buffer(0).toInt, buffer(1).toInt)
-    }
-    var moves_list = prop.getProperty("moves").split(" ")
-    this.moves = Map("Up" -> moves_list(0).toInt, "Down" -> moves_list(1).toInt, "Left" -> moves_list(2).toInt, "Right" -> moves_list(3).toInt)
+    val file = new File(getCurrentDirectory + "/src/levels/" + filename + ".json")
+    val bw = new BufferedWriter(new FileWriter(file))
+    bw.write(pretty(render(json)))
+    bw.close()
+    //parseJSONLevel(filename + ".json")
   }
 }
