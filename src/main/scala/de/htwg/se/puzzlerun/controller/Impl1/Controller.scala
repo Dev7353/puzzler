@@ -8,8 +8,11 @@ import de.htwg.se.puzzlerun.model.Impl1._
 
 import scala.collection.mutable.Map
 import scala.swing.Publisher
+import com.google.inject.name.{Named, Names}
+import javax.inject.Inject
 
-class Controller(path: String) extends IController with Publisher {
+
+class Controller @Inject() (path: String) extends IController with Publisher {
   var state = ""
   var level = 0
   var grid: Grid = _
@@ -17,7 +20,7 @@ class Controller(path: String) extends IController with Publisher {
   var target: Target = _
   var player: Player = _
   var moves: Map[String, Int] = _
-  generate_level(path)
+  generate_level("level00.config")
   wrap()
 
   def wrap(): Unit = {
@@ -144,8 +147,12 @@ class Controller(path: String) extends IController with Publisher {
   }
 
   def generate_level(path: String): Unit = {
+<<<<<<< Updated upstream
     import java.nio.file.{ Paths, Files }
 
+=======
+    import java.nio.file.{Paths, Files}
+>>>>>>> Stashed changes
     var prop: Properties = new Properties()
     def getCurrentDirectory = new java.io.File(".").getCanonicalPath
     val filename: String = getCurrentDirectory + "/src/levels/" + path
