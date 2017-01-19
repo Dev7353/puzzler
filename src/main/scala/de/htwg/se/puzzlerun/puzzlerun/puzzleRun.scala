@@ -19,24 +19,10 @@ object puzzleRun {
   def gameLoop(controller: IController, tui: ITui): Unit = {
     tui.draw()
     print("\n")
-
-    val loop = new Breaks
-    loop.breakable {
-      while (true) {
-        tui.input()
-
-      }
+    while (true) {
+      tui.input()
     }
 
-    print("Weiterspielen?\n")
-    var eingabe = readLine("Eingabe: \n")
-
-    eingabe match {
-
-      case "y" => main(args = new Array[String](3))
-      case "n" => return
-      case default => print("Input not recognized. Please put in 'y' or 'n")
-    }
   }
   def main(args: Array[String]): Unit = {
 

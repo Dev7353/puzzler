@@ -40,7 +40,7 @@ case class Tui(var c: IController) extends Observer with ITui {
     } else if (c.state.equals("Moves depleted")) {
       logger.info("No more moves left!")
     }
-    Thread.sleep(200)
+    Thread.sleep(100)
   }
 
   def input(): Int = {

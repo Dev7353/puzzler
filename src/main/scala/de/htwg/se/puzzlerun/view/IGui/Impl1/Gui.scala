@@ -3,6 +3,11 @@
  */
 package de.htwg.se.puzzlerun.view.IGui.Impl1
 
+import java.awt.{Graphics, Image}
+import java.awt.image.BufferedImage
+import java.io.File
+import javafx.scene.control.CheckBox
+import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 
 import de.htwg.se.puzzlerun.controller.IController
@@ -14,11 +19,19 @@ import scala.swing.event.{ButtonClicked, Key, KeyPressed}
 import BorderPanel.Position._
 
 class Gui(var c: IController) extends MainFrame with Observer with IGui {
+  c.add(this)
+  def update = draw()
+
+  var grid_height = 600
+  var grid_width = 600
+  var helper = false
   def getCurrentDirectory = new java.io.File(".").getCanonicalPath
   var player_img = getCurrentDirectory + "/src/img/player.png"
-  var obstacle_img = getCurrentDirectory + "/src/img/obstacle.jpeg"
+  var obstacle_img = getCurrentDirectory + "/src/img/obstacle.png"
   var grass_img = getCurrentDirectory + "/src/img/grass.png"
   var door_img = getCurrentDirectory + "/src/img/door.png"
+
+  var cb: Component = new RadioButton("Helper")
 
   var current_level = 0
   var fields = Array.ofDim[BoxPanel](c.grid.height, c.grid.length)
@@ -28,7 +41,9 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
   var right = "Right " + c.moves.get("Right").get
   var left = "Left " + c.moves.get("Left").get
 
-  var lbl_level = new Label("LEVEL " + current_level)
+  var lbl_level = new Label("LEVEL " + current_level){
+    font = new Font("Verdana", 1, 36)
+  }
 
   var btn_up = new Button("" + up)
   var btn_down = new Button("" + down)
@@ -37,34 +52,35 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
 
   fill()
 
-  c.add(this)
-
-  def update = draw()
-
   title = "Puzzlrun"
 
   menuBar = new MenuBar{
     contents += new Menu("Puzzlerun"){
 
-      contents += new MenuItem(Action("about"){Dialog.showMessage(null, "Puzzlerun 1.0", title = "You pressed me")})
+      contents += new MenuItem(Action("about"){Dialog.showMessage(null, "Puzzlerun 1.0", title = "about")})
       contents += new Separator
       contents += new MenuItem(Action("quit"){sys.exit()})
 
     }
   }
 
-  def titleBox = new BoxPanel(Orientation.Horizontal) {
+  def titleBox = new GridPanel(2,1) {
+    contents += new Label("Puzzlerun"){
+      font = new Font("Verdana", 2, 40)
+    }
     contents += lbl_level
   }
 
   var grid = new GridPanel(c.grid.length, c.grid.height) {
 
+    border = Swing.BeveledBorder(Swing.Raised)
     for {
 
       row <- 0 until c.grid.length
       col <- 0 until c.grid.height
     } {
       contents += fields(row)(col)
+
     }
   }
 
@@ -80,9 +96,15 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
       contents += new Label(" ")
       contents += btn_down
       contents += new Label(" ")
+      border = Swing.BeveledBorder(Swing.Raised)
+      background = java.awt.Color.BLACK
     }
 
+    def cb_area = new BoxPanel(Orientation.Horizontal){
+      contents += cb
+    }
     add(directions, Center)
+    add(cb_area, South)
   }
 
   contents = new BorderPanel {
@@ -95,6 +117,7 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
   listenTo(btn_up)
   listenTo(btn_left)
   listenTo(btn_right)
+  listenTo(cb)
 
   listenTo(grid.keys)
 
@@ -121,20 +144,17 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
         if (c.moves.get("Left").get == 0)
           btn_left.enabled = false
       }
+      else if(b.text.equals("Helper"))
 
       if (c.state.equals("Target reached")) {
-        Dialog.showMessage(contents.head, "Congrats Pal :)", title = "You pressed me")
+        Dialog.showMessage(contents.head, "Congrats Pal :)", title = "")
       } else if (c.state.equals("Obstacle reached")) {
-        Dialog.showMessage(contents.head, "Well, that was bad. Good Luck next time", title = "You pressed me")
+        Dialog.showMessage(contents.head, "Well, that was bad. Good Luck next time", title = "LOSER!")
         sys.exit()
       } else if (c.state.equals("Moves depleted")) {
-        Dialog.showMessage(contents.head, "No more moves left!", title = "You pressed me")
+        Dialog.showMessage(contents.head, "No more moves left!", title = "LOSER!")
       }
 
-    case KeyPressed(_, Key.Up, _, _) =>
-      print("DEBUG UP\n")
-      c.up()
-      btn_up.text = "Up " + c.moves.get("Up").get
 
   }
   resizable = true
@@ -176,28 +196,17 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
       row <- 0 until c.grid.length
       col <- 0 until c.grid.height
     } {
-      fields(row)(col).contents.clear()
 
       if (c.grid.getCell(row, col).toString.equals("p")) {
+        fields(row)(col).contents.clear()
         fields(row)(col).contents += new Label("") {
-          icon = new ImageIcon(player_img)
-          preferredSize = new Dimension(20, 20)
+          icon = new ImageIcon(getImage(player_img))
         }
-      } else if (c.grid.getCell(row, col).toString.equals("o")) {
-        fields(row)(col).contents += new Label("") {
-          icon = new ImageIcon(obstacle_img)
-          preferredSize = new Dimension(20, 20)
-        }
-      } else if (c.grid.getCell(row, col).toString.equals("X")) {
-        fields(row)(col).contents += new Label("") {
-          icon = new ImageIcon(door_img)
-          preferredSize = new Dimension(20, 20)
-        }
-      } else if (c.grid.getCell(row, col).toString.equals("-")) {
+      }
+      if (c.grid.getCell(row, col).toString.equals("-")) {
+        fields(row)(col).contents.clear()
         fields(row)(col).contents += new Label("") {
           icon = new ImageIcon(grass_img)
-          preferredSize = new Dimension(20, 20)
-
         }
       }
 
@@ -215,24 +224,35 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
 
     } {
       fields(row)(col) = new BoxPanel(Orientation.Horizontal) {
+
         if (c.grid.getCell(row, col).toString.equals("p")) {
           contents += new Label("") {
-            icon = new ImageIcon(player_img)
+            icon = new ImageIcon(getImage(player_img))
+
           }
         } else if (c.grid.getCell(row, col).toString.equals("X")) {
           contents += new Label("") {
-            icon = new ImageIcon(door_img)
+            icon = new ImageIcon(getImage(door_img))
           }
         } else if (c.grid.getCell(row, col).toString.equals("-")) {
-          contents += new Label("" + row + ", " + col) {
-            //icon = new ImageIcon(grass_img)
+          contents += new Label("") {
+            icon = new ImageIcon(getImage(grass_img))
           }
         } else if (c.grid.getCell(row, col).toString.equals("o")) {
           contents += new Label("") {
-            icon = new ImageIcon(obstacle_img)
+
+            icon = new ImageIcon(getImage(obstacle_img))
+
           }
         }
       }
     }
+  }
+
+  def getImage(file: String): Image={
+    var ic: ImageIcon = new ImageIcon(file)
+    var newImage: Image = ic.getImage.getScaledInstance(grid_height/c.grid.height,grid_width/c.grid.length, Image.SCALE_SMOOTH)
+    newImage
+
   }
 }
