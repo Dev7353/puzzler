@@ -188,7 +188,7 @@ class Controller(path: String) extends IController with Publisher {
     val filename = path.substring(0, 7)
     val tempObstacle = this.obstacles.map(o => List(o.coordinate._1, o.coordinate._2))
     val json =
-        ("grid" -> List(this.grid.height.toString, this.grid.length.toString)) ~
+          ("grid" -> List(this.grid.height.toString, this.grid.length.toString)) ~
           ("player" -> List(this.player.coordinate._1, this.player.coordinate._2)) ~
           ("target" -> List(this.target.coordinate._1, this.target.coordinate._2)) ~
           ("obstacles" -> tempObstacle) ~
@@ -201,7 +201,6 @@ class Controller(path: String) extends IController with Publisher {
     parseJSONLevel(filename + ".json")
   }
   def parseJSONLevel(path: String): Unit = {
-    println(path)
     def getCurrentDirectory = new java.io.File(".").getCanonicalPath
     val filename: String = getCurrentDirectory + "/src/levels/" + path
     val json = parse(Source.fromFile(filename).mkString)
@@ -214,6 +213,5 @@ class Controller(path: String) extends IController with Publisher {
       "Down" -> json.\("moves").children(1).children(0).extract[Int],
       "Left" -> json.\("moves").children(3).children(0).extract[Int],
       "Right" -> json.\("moves").children(0).children(0).extract[Int])
-    //println(json.\("moves").children(1).children(0).extract[Int])
     }
 }
