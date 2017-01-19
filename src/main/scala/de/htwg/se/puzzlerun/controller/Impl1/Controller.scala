@@ -180,12 +180,13 @@ class Controller(path: String) extends IController with Publisher {
     generateJSONLevel()
   }
   def generateJSONLevel(): Unit = {
+    val tempObstacle = this.obstacles.map(e => e.coordinate.toString)
     val json =
       "level" ->
         ("grid" -> List(this.grid.height.toString, this.grid.length.toString)) ~
           ("player" -> this.player.coordinate.toString) ~
           ("target" -> this.target.coordinate.toString) ~
-          ("obstacles" -> this.obstacles.toString) ~
+          ("obstacles" -> tempObstacle) ~
           ("moves" -> this.moves)
 
 
