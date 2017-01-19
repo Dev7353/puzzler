@@ -145,35 +145,9 @@ class Controller(path: String) extends IController with Publisher {
   }
 
   def generate_level(path: String): Unit = {
-    import java.nio.file.{Paths, Files}
 
-    var prop: Properties = new Properties()
-    def getCurrentDirectory = new java.io.File(".").getCanonicalPath
-    val filename: String = getCurrentDirectory + "/src/levels/" + path
-    if(!Files.exists(Paths.get(filename))){
-      level = -1
-      return
-    }
-    val is: InputStream = new FileInputStream(filename)
-
-
-    prop.load(is)
-
-    var grid_size = prop.getProperty("grid").split(",")
-    this.grid = Grid(grid_size(0).toInt, grid_size(1).toInt)
-
-    val playerCoord = prop.getProperty("player").split(",")
-    this.player = Player(playerCoord(0).toInt, playerCoord(1).toInt)
-
-    var target_coord = prop.getProperty("target").split(",")
-    this.target = Target(target_coord(0).toInt, target_coord(1).toInt)
-
-    var obstacles_list = prop.getProperty("obstacles").split(" ")
-    for (entry <- obstacles_list) {
-      var buffer = entry.split(",")
-      this.obstacles += Obstacle(buffer(0).toInt, buffer(1).toInt)
-    }
-    var moves_list = prop.getProperty("moves").split(" ")
-    this.moves = Map("Up" -> moves_list(0).toInt, "Down" -> moves_list(1).toInt, "Left" -> moves_list(2).toInt, "Right" -> moves_list(3).toInt)
+    val sg: ParseStrategy = new TextParser
+    val context = new Context(sg, this)
+    context.execute(path)
   }
 }
