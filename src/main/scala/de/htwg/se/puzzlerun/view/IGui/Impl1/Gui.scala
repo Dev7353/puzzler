@@ -16,6 +16,12 @@ import scala.swing.event.{ButtonClicked, Key, KeyPressed}
 import BorderPanel.Position._
 
 class Gui(var c: IController) extends MainFrame with Observer with IGui {
+  def getCurrentDirectory = new java.io.File(".").getCanonicalPath
+  var player_img = getCurrentDirectory + "/src/main/scala/de/htwg/se/puzzlerun/view/IGUI/Impl1/player.png"
+  var obstacle_img = getCurrentDirectory + "/src/main/scala/de/htwg/se/puzzlerun/view/IGUI/Impl1/obstacle.jpeg"
+  var grass_img = getCurrentDirectory + "/src/main/scala/de/htwg/se/puzzlerun/view/IGUI/Impl1/grass.png"
+  var door_img = getCurrentDirectory + "/src/main/scala/de/htwg/se/puzzlerun/view/IGUI/Impl1/door.png"
+
   var current_level = 0
   var fields = Array.ofDim[BoxPanel](c.grid.height, c.grid.length)
 
@@ -168,22 +174,27 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
 
       if (c.grid.getCell(row, col).toString.equals("p")) {
         fields(row)(col).contents += new Label("") {
-          icon = new ImageIcon("/Users/kmg/projects/puzzlerun/src/main/scala/de/htwg/se/puzzlerun/view/IGui/Impl1/player.png")
+          icon = new ImageIcon(player_img)
+          preferredSize = new Dimension (20,20)
         }
       }
       else if (c.grid.getCell(row, col).toString.equals("o")) {
         fields(row)(col).contents += new Label("") {
-          icon = new ImageIcon("/Users/kmg/projects/puzzlerun/src/main/scala/de/htwg/se/puzzlerun/view/IGui/Impl1/obstacle.jpeg")
+          icon = new ImageIcon(obstacle_img)
+          preferredSize = new Dimension (20,20)
         }
       }
       else if (c.grid.getCell(row, col).toString.equals("X")) {
         fields(row)(col).contents += new Label("") {
-          icon = new ImageIcon("/Users/kmg/projects/puzzlerun/src/main/scala/de/htwg/se/puzzlerun/view/IGui/Impl1/door.png")
+          icon = new ImageIcon(door_img)
+          preferredSize = new Dimension (20,20)
         }
       }
       else if (c.grid.getCell(row, col).toString.equals("-")) {
         fields(row)(col).contents += new Label("") {
-          icon = new ImageIcon("/Users/kmg/projects/puzzlerun/src/main/scala/de/htwg/se/puzzlerun/view/IGui/Impl1/grass.png")
+          icon = new ImageIcon(grass_img)
+          preferredSize = new Dimension (20,20)
+
         }
       }
 
@@ -204,22 +215,22 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
       fields(row)(col) = new BoxPanel(Orientation.Horizontal) {
         if (c.grid.getCell(row, col).toString.equals("p")) {
           contents += new Label("") {
-            icon = new ImageIcon("/Users/kmg/projects/puzzlerun/src/main/scala/de/htwg/se/puzzlerun/view/IGui/Impl1/player.png")
+            icon = new ImageIcon(player_img)
           }
         }
         else if (c.grid.getCell(row, col).toString.equals("X")) {
           contents += new Label("") {
-            icon = new ImageIcon("/Users/kmg/projects/puzzlerun/src/main/scala/de/htwg/se/puzzlerun/view/IGui/Impl1/door.png")
+            icon = new ImageIcon(door_img)
           }
         }
         else if (c.grid.getCell(row, col).toString.equals("-")) {
           contents += new Label("") {
-            icon = new ImageIcon("/Users/kmg/projects/puzzlerun/src/main/scala/de/htwg/se/puzzlerun/view/IGui/Impl1/grass.png")
+            icon = new ImageIcon(grass_img)
           }
         }
         else if (c.grid.getCell(row, col).toString.equals("o")) {
           contents += new Label("") {
-            icon = new ImageIcon("/Users/kmg/projects/puzzlerun/src/main/scala/de/htwg/se/puzzlerun/view/IGui/Impl1/obstacle.jpeg")
+            icon = new ImageIcon(obstacle_img)
           }
         }
       }
