@@ -155,6 +155,7 @@ class Controller(path: String) extends IController with Publisher {
     val sg2: ParseStrategy = new JsonParser
     val context = new Context(sg2, this)
     context.execute(path)
+    generateJSONLevel(path)
   }
   def generateJSONLevel(path: String): Unit = {
     def getCurrentDirectory = new java.io.File(".").getCanonicalPath
@@ -171,6 +172,5 @@ class Controller(path: String) extends IController with Publisher {
     val bw = new BufferedWriter(new FileWriter(file))
     bw.write(pretty(render(json)))
     bw.close()
-    //parseJSONLevel(filename + ".json")
   }
 }

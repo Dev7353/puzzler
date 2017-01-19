@@ -5,12 +5,13 @@ import de.htwg.se.puzzlerun.model._
 import org.scalatest._
 
 import scala.collection.mutable
+import scala.io.Source
 
 /**
  * Created by kmg on 18.11.16.
  */
 class ControllerTest extends WordSpec with Matchers {
-  var controller = new Controller("level00.config")
+  var controller = new Controller("level00.json")
 
   "CheckCell" should {
 
@@ -145,6 +146,14 @@ class ControllerTest extends WordSpec with Matchers {
 
     "checkEingabelength returns false" in {
       assert(controller.checkEingabeLength(5) == false)
+    }
+  }
+  "generateJSONLevel" should {
+    controller.generateJSONLevel("level00.config")
+    "create a JSON file" in {
+      def getCurrentDirectory = new java.io.File(".").getCanonicalPath
+      val filename: String = getCurrentDirectory + "/src/levels/" + "level00.json"
+      assert(Source.fromFile(filename).nonEmpty)
     }
   }
 
