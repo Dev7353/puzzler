@@ -145,10 +145,17 @@ class Controller(path: String) extends IController with Publisher {
   }
 
   def generate_level(path: String): Unit = {
+    import java.nio.file.{Paths, Files}
+
     var prop: Properties = new Properties()
     def getCurrentDirectory = new java.io.File(".").getCanonicalPath
     val filename: String = getCurrentDirectory + "/src/levels/" + path
+    if(!Files.exists(Paths.get(filename))){
+      level = -1
+      return
+    }
     val is: InputStream = new FileInputStream(filename)
+
 
     prop.load(is)
 
