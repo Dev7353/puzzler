@@ -9,6 +9,8 @@ import de.htwg.se.puzzlerun.view.ITui.ITui
 import de.htwg.se.puzzlerun.view.ITui.Impl1.Tui
 import de.htwg.se.puzzlerun.view.IGui.Impl1.Gui
 
+import com.google.inject.Guice
+
 import scala.util.control._
 import scala.io.StdIn._
 

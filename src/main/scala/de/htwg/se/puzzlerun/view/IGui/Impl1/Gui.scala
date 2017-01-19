@@ -92,6 +92,8 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
   listenTo(btn_left)
   listenTo(btn_right)
 
+  listenTo(grid.keys)
+
 
   reactions += {
     case ButtonClicked(b) =>
@@ -124,11 +126,17 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
         Dialog.showMessage(contents.head, "Congrats Pal :)", title = "You pressed me")
       }
       else if (c.state.equals("Obstacle reached")) {
-        Dialog.showMessage(contents.head, "Well, that was bad.", title = "You pressed me")
+        Dialog.showMessage(contents.head, "Well, that was bad. Good Luck next time", title = "You pressed me")
+        sys.exit()
       }
       else if (c.state.equals("Moves depleted")) {
         Dialog.showMessage(contents.head, "No more moves left!", title = "You pressed me")
       }
+
+    case KeyPressed(_,Key.Up,_,_) =>
+      print("DEBUG UP\n")
+      c.up()
+      btn_up.text = "Up " + c.moves.get("Up").get
 
   }
   resizable = true
@@ -224,8 +232,8 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
           }
         }
         else if (c.grid.getCell(row, col).toString.equals("-")) {
-          contents += new Label("") {
-            icon = new ImageIcon(grass_img)
+          contents += new Label("" + row + ", " + col) {
+            //icon = new ImageIcon(grass_img)
           }
         }
         else if (c.grid.getCell(row, col).toString.equals("o")) {
