@@ -38,7 +38,7 @@ object puzzleRun {
   }
   def main(args: Array[String]): Unit = {
 
-    var controller: IController = new Controller("level00.config")
+    var controller: IController = new Controller("level00.json")
     val tui: ITui = Tui(controller)
     val gui = new Gui(controller)
     gameLoop(controller, tui)
