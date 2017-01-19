@@ -10,6 +10,6 @@ class Context(sg: ParseStrategy, c: Controller){
   val controller: Controller = c
 
   def execute(file: String): Unit ={
-    strategy.parse(file, controller)
+    strategy.levelParse(file, controller)
   }
 }

@@ -7,17 +7,21 @@ import java.io.{FileInputStream, InputStream}
 import java.util.Properties
 
 import de.htwg.se.puzzlerun.model.Impl1.{Grid, Obstacle, Player, Target}
+import net.liftweb.json.parse
 
 import scala.collection.mutable
+import scala.io.Source
+
+import scala.collection.mutable.Map
 
 trait ParseStrategy{
 
-  def parse(file: String, c: Controller)
+  def levelParse(file: String, c: Controller)
 }
 
 class TextParser() extends ParseStrategy{
 
-  override def parse(file:String, c:Controller): Unit ={
+  override def levelParse(file:String, c:Controller): Unit ={
 
     import java.nio.file.{Paths, Files}
 
@@ -51,8 +55,19 @@ class TextParser() extends ParseStrategy{
 }
 
 class JsonParser() extends ParseStrategy{
-
-  override def parse(file: String, c: Controller): Unit = {
-
+  implicit val formats = net.liftweb.json.DefaultFormats
+  override def levelParse(file: String, c: Controller): Unit = {
+    def getCurrentDirectory = new java.io.File(".").getCanonicalPath
+    val filename: String = getCurrentDirectory + "/src/levels/" + file
+    val json = parse(Source.fromFile(filename).mkString)
+    c.grid = Grid(json.\("grid").children.head.extract[String].toInt, json.\("grid").children(1).extract[String].toInt)
+    c.player = Player(json.\("player").children.head.extract[Int], json.\("player").children(1).extract[Int])
+    c.target = Target(json.\("target").children.head.extract[Int], json.\("target").children(1).extract[Int])
+    for(i <- 0 until json.\("obstacles").children.length)
+      c.obstacles += Obstacle(json.\("obstacles").children(i)(0).extract[Int], json.\("obstacles").children(i)(1).extract[Int])
+    c.moves = Map("Up" -> json.\("moves").children(2).children(0).extract[Int],
+      "Down" -> json.\("moves").children(1).children(0).extract[Int],
+      "Left" -> json.\("moves").children(3).children(0).extract[Int],
+      "Right" -> json.\("moves").children(0).children(0).extract[Int])
   }
 }

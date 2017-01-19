@@ -22,8 +22,8 @@ class Controller(path: String) extends IController with Publisher {
   var target: Target = _
   var player: Player = _
   var moves: Map[String, Int] = _
-  parseJSONLevel(path)
-  //generate_level(path)
+  //parseJSONLevel(path)
+  generate_level(path)
   wrap()
 
   def wrap(): Unit = {
@@ -153,7 +153,8 @@ class Controller(path: String) extends IController with Publisher {
   def generate_level(path: String): Unit = {
 
     val sg: ParseStrategy = new TextParser
-    val context = new Context(sg, this)
+    val sg2: ParseStrategy = new JsonParser
+    val context = new Context(sg2, this)
     context.execute(path)
   }
   def generateJSONLevel(path: String): Unit = {
@@ -171,20 +172,6 @@ class Controller(path: String) extends IController with Publisher {
     val bw = new BufferedWriter(new FileWriter(file))
     bw.write(pretty(render(json)))
     bw.close()
-    parseJSONLevel(filename + ".json")
+    //parseJSONLevel(filename + ".json")
   }
-  def parseJSONLevel(path: String): Unit = {
-    def getCurrentDirectory = new java.io.File(".").getCanonicalPath
-    val filename: String = getCurrentDirectory + "/src/levels/" + path
-    val json = parse(Source.fromFile(filename).mkString)
-    this.grid = Grid(json.\("grid").children.head.extract[String].toInt, json.\("grid").children(1).extract[String].toInt)
-    this.player = Player(json.\("player").children.head.extract[Int], json.\("player").children(1).extract[Int])
-    this.target = Target(json.\("target").children.head.extract[Int], json.\("target").children(1).extract[Int])
-    for(i <- 0 until json.\("obstacles").children.length)
-      this.obstacles += Obstacle(json.\("obstacles").children(i)(0).extract[Int], json.\("obstacles").children(i)(1).extract[Int])
-    this.moves = Map("Up" -> json.\("moves").children(2).children(0).extract[Int],
-      "Down" -> json.\("moves").children(1).children(0).extract[Int],
-      "Left" -> json.\("moves").children(3).children(0).extract[Int],
-      "Right" -> json.\("moves").children(0).children(0).extract[Int])
-    }
 }
