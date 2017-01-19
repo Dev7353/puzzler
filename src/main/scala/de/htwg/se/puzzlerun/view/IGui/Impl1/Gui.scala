@@ -15,10 +15,10 @@ import BorderPanel.Position._
 
 class Gui(var c: IController) extends MainFrame with Observer with IGui {
   def getCurrentDirectory = new java.io.File(".").getCanonicalPath
-  var player_img = getCurrentDirectory + "/src/main/scala/de/htwg/se/puzzlerun/view/IGUI/Impl1/player.png"
-  var obstacle_img = getCurrentDirectory + "/src/main/scala/de/htwg/se/puzzlerun/view/IGUI/Impl1/obstacle.jpeg"
-  var grass_img = getCurrentDirectory + "/src/main/scala/de/htwg/se/puzzlerun/view/IGUI/Impl1/grass.png"
-  var door_img = getCurrentDirectory + "/src/main/scala/de/htwg/se/puzzlerun/view/IGUI/Impl1/door.png"
+  var player_img = getCurrentDirectory + "/src/img/player.png"
+  var obstacle_img = getCurrentDirectory + "/src/img/obstacle.jpeg"
+  var grass_img = getCurrentDirectory + "/src/img/grass.png"
+  var door_img = getCurrentDirectory + "/src/img/door.png"
 
   var current_level = 0
   var fields = Array.ofDim[BoxPanel](c.grid.height, c.grid.length)

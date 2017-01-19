@@ -8,6 +8,7 @@ resolvers += Resolver.jcenterRepo
 libraryDependencies += "org.scala-lang" % "scala-swing" % "2.11+"
 libraryDependencies += "net.liftweb" %% "lift-json" % "2.6+"
 libraryDependencies += "net.codingwell" %% "scala-guice" % "4.1.0"
+libraryDependencies += "org.apache.spark" %% "spark-core" % "2.1.0"
 libraryDependencies ++= {
   val scalaTestV       = "3.0.0-M15"
   val scalaMockV       = "3.2.2"

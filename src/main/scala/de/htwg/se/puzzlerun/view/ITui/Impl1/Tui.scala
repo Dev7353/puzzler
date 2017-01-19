@@ -5,38 +5,40 @@ import de.htwg.se.puzzlerun.util._
 import de.htwg.se.puzzlerun.view.ITui.ITui
 
 import scala.io.StdIn._
-import scala.swing.Dialog
 import scala.util.control.Breaks
+import org.apache.log4j._
 
 case class Tui(var c: IController) extends Observer with ITui {
   var current_level = 0
   c.add(this)
   def update = draw()
+  val logger = Logger.getLogger(getClass().getName())
+
+
+  logger.info("--- Puzzlerun ---")
+  logger.info("The awesome labyrinth game!")
 
   def draw(): Unit = {
     var size = this.c.grid.grid.length
     var format = "%-" + size * 4 + "s%-" + size * 2 + "s%-" + size * 2 + "s%-" + size * 2 + "s%" + size * 2 + "s\n"
 
-    printf(format, "Gamefield", "Up", "Down", "Left", "Right")
+    logger.info(format, "Gamefield", "Up", "Down", "Left", "Right")
+    println(format, this.c.moves.get("Up").get, this.c.moves.get("Down").get, this.c.moves.get("Left").get, this.c.moves.get("Right").get)
     val field = this.c.grid.grid
     for (i <- field.indices) {
       for (j <- field(0).indices) {
         print(field(i)(j) + "\t")
       }
-      if (i == field.length / 2) {
-        var format = "%-" + size * 2 + "s%-" + size * 2 + "s%-" + size * 3 + "s%-" + size + "s\n"
-        printf(format, this.c.moves.get("Up").get, this.c.moves.get("Down").get, this.c.moves.get("Left").get, this.c.moves.get("Right").get)
 
-      }
       print("\n")
     }
     if (c.state.equals("Target reached")) {
-      println("Congrats Pal :)")
+      logger.info("Congrats Pal :)")
 
     } else if (c.state.equals("Obstacle reached")) {
-      println("Well, that was bad. Good Luck next time.")
+      logger.info("Well, that was bad. Good Luck next time.")
     } else if (c.state.equals("Moves depleted")) {
-      println("No more moves left!")
+      logger.info("No more moves left!")
     }
     Thread.sleep(200)
   }
@@ -63,7 +65,7 @@ case class Tui(var c: IController) extends Observer with ITui {
             eingabeLength -= 1
           case 'q' => sys.exit()
           case _ =>
-            print("Falsche Eingabe. Wird ignoriert.\n")
+            logger.info("Falsche Eingabe. Wird ignoriert.\n")
             eingabeLength -= 1
         }
       }

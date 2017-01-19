@@ -1,0 +1,71 @@
+INFO main de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - --- Puzzlerun ---
+INFO main de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - The awesome labyrinth game!
+INFO main de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO main de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-8s%-8s%-12s%-4s
+,5,5,5,5)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-8s%-8s%-12s%-4s
+,5,5,5,5)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-8s%-8s%-12s%-4s
+,4,5,5,5)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-8s%-8s%-12s%-4s
+,4,5,4,5)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-8s%-8s%-12s%-4s
+,3,5,4,5)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-8s%-8s%-12s%-4s
+,2,5,4,5)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-24s%-12s%-12s%-12s%12s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-12s%-12s%-18s%-6s
+,6,7,4,3)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - Congrats Pal :)
+INFO main de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - --- Puzzlerun ---
+INFO main de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - The awesome labyrinth game!
+INFO main de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO main de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,5,5,5,5)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,5,5,5,5)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,4,5,5,5)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,4,5,4,5)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,3,5,4,5)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,2,5,4,5)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-24s%-12s%-12s%-12s%12s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-24s%-12s%-12s%-12s%12s
+,6,7,4,3)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - Congrats Pal :)
+INFO main de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - --- Puzzlerun ---
+INFO main de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - The awesome labyrinth game!
+INFO main de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - (%-16s%-8s%-8s%-8s%8s
+,Gamefield,Up,Down,Left,Right)
+INFO AWT-EventQueue-0 de.htwg.se.puzzlerun.view.ITui.Impl1.Tui - Well, that was bad. Good Luck next time.
