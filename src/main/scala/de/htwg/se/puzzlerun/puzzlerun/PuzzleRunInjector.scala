@@ -3,6 +3,7 @@
   */
 package de.htwg.se.puzzlerun.puzzlerun
 
+import com.apple.laf.AquaButtonBorder.Named
 import com.google.inject.name.Names
 import com.google.inject.{AbstractModule, PrivateModule}
 import de.htwg.se.puzzlerun.controller.IController
@@ -12,7 +13,7 @@ import net.codingwell.scalaguice.{ScalaModule, ScalaPrivateModule}
 class PuzzleRunInjector extends AbstractModule with ScalaModule {
   def configure(): Unit = {
 
-    bind[Controller]
+    bind[IController].to[Controller]
 
   }
 }

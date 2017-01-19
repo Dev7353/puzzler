@@ -1,6 +1,6 @@
 package de.htwg.se.puzzlerun.controller.Impl1
 
-import java.io.{ FileInputStream, InputStream }
+import java.io.{FileInputStream, InputStream}
 import java.util.Properties
 
 import de.htwg.se.puzzlerun.controller.IController
@@ -11,8 +11,10 @@ import scala.swing.Publisher
 import com.google.inject.name.{Named, Names}
 import javax.inject.Inject
 
+import com.sun.org.glassfish.gmbal.ParameterNames
 
-class Controller @Inject() (path: String) extends IController with Publisher {
+
+class Controller @Inject() (@ParameterNames path: String) extends IController with Publisher {
   var state = ""
   var level = 0
   var grid: Grid = _
@@ -147,12 +149,8 @@ class Controller @Inject() (path: String) extends IController with Publisher {
   }
 
   def generate_level(path: String): Unit = {
-<<<<<<< Updated upstream
-    import java.nio.file.{ Paths, Files }
-
-=======
+    print("DEBUG " + path + "\n")
     import java.nio.file.{Paths, Files}
->>>>>>> Stashed changes
     var prop: Properties = new Properties()
     def getCurrentDirectory = new java.io.File(".").getCanonicalPath
     val filename: String = getCurrentDirectory + "/src/levels/" + path
