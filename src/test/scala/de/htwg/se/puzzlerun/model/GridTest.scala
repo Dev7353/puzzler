@@ -1,6 +1,6 @@
 package de.htwg.se.puzzlerun.model
 
-import de.htwg.se.puzzlerun.model.Impl1.{Cell, Grid}
+import de.htwg.se.puzzlerun.model.Impl1.{ Cell, Grid }
 import org.scalatest._
 
 /**
