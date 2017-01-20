@@ -3,7 +3,7 @@
  */
 package de.htwg.se.puzzlerun.view.IGui.Impl1
 
-import java.awt.{Graphics, Image}
+import java.awt.{ Graphics, Image }
 import java.awt.image.BufferedImage
 import java.io.File
 import javafx.scene.control.CheckBox
@@ -14,8 +14,8 @@ import de.htwg.se.puzzlerun.controller.IController
 import de.htwg.se.puzzlerun.util._
 import de.htwg.se.puzzlerun.view.IGui.IGui
 
-import scala.swing.{BorderPanel, BoxPanel, _}
-import scala.swing.event.{ButtonClicked, Key, KeyPressed}
+import scala.swing.{ BorderPanel, BoxPanel, _ }
+import scala.swing.event.{ ButtonClicked, Key, KeyPressed }
 import BorderPanel.Position._
 
 class Gui(var c: IController) extends MainFrame with Observer with IGui {
@@ -41,7 +41,7 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
   var right = "Right " + c.moves.get("Right").get
   var left = "Left " + c.moves.get("Left").get
 
-  var lbl_level = new Label("LEVEL " + current_level){
+  var lbl_level = new Label("LEVEL " + current_level) {
     font = new Font("Verdana", 1, 36)
   }
 
@@ -54,18 +54,18 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
 
   title = "Puzzlrun"
 
-  menuBar = new MenuBar{
-    contents += new Menu("Puzzlerun"){
+  menuBar = new MenuBar {
+    contents += new Menu("Puzzlerun") {
 
-      contents += new MenuItem(Action("about"){Dialog.showMessage(null, "Puzzlerun 1.0", title = "about")})
+      contents += new MenuItem(Action("about") { Dialog.showMessage(null, "Puzzlerun 1.0", title = "about") })
       contents += new Separator
-      contents += new MenuItem(Action("quit"){sys.exit()})
+      contents += new MenuItem(Action("quit") { sys.exit() })
 
     }
   }
 
-  def titleBox = new GridPanel(2,1) {
-    contents += new Label("Puzzlerun"){
+  def titleBox = new GridPanel(2, 1) {
+    contents += new Label("Puzzlerun") {
       font = new Font("Verdana", 2, 40)
     }
     contents += lbl_level
@@ -100,7 +100,7 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
       background = java.awt.Color.BLACK
     }
 
-    def cb_area = new BoxPanel(Orientation.Horizontal){
+    def cb_area = new BoxPanel(Orientation.Horizontal) {
       contents += cb
     }
     add(directions, Center)
@@ -143,18 +143,16 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
         btn_left.text = "Left " + c.moves.get("Left").get
         if (c.moves.get("Left").get == 0)
           btn_left.enabled = false
-      }
-      else if(b.text.equals("Helper"))
+      } else if (b.text.equals("Helper"))
 
-      if (c.state.equals("Target reached")) {
-        Dialog.showMessage(contents.head, "Congrats Pal :)", title = "")
-      } else if (c.state.equals("Obstacle reached")) {
-        Dialog.showMessage(contents.head, "Well, that was bad. Good Luck next time", title = "LOSER!")
-        sys.exit()
-      } else if (c.state.equals("Moves depleted")) {
-        Dialog.showMessage(contents.head, "No more moves left!", title = "LOSER!")
-      }
-
+        if (c.state.equals("Target reached")) {
+          Dialog.showMessage(contents.head, "Congrats Pal :)", title = "")
+        } else if (c.state.equals("Obstacle reached")) {
+          Dialog.showMessage(contents.head, "Well, that was bad. Good Luck next time", title = "LOSER!")
+          sys.exit()
+        } else if (c.state.equals("Moves depleted")) {
+          Dialog.showMessage(contents.head, "No more moves left!", title = "LOSER!")
+        }
 
   }
   resizable = true
@@ -249,9 +247,9 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
     }
   }
 
-  def getImage(file: String): Image={
+  def getImage(file: String): Image = {
     var ic: ImageIcon = new ImageIcon(file)
-    var newImage: Image = ic.getImage.getScaledInstance(grid_height/c.grid.height,grid_width/c.grid.length, Image.SCALE_SMOOTH)
+    var newImage: Image = ic.getImage.getScaledInstance(grid_height / c.grid.height, grid_width / c.grid.length, Image.SCALE_SMOOTH)
     newImage
 
   }

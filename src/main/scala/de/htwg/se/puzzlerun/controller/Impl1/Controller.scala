@@ -164,11 +164,11 @@ class Controller @Inject() (path: String) extends IController with Publisher {
     val filename = path.substring(0, 7)
     val tempObstacle = this.obstacles.map(o => List(o.coordinate._1, o.coordinate._2))
     val json =
-          ("grid" -> List(this.grid.height.toString, this.grid.length.toString)) ~
-          ("player" -> List(this.player.coordinate._1, this.player.coordinate._2)) ~
-          ("target" -> List(this.target.coordinate._1, this.target.coordinate._2)) ~
-          ("obstacles" -> tempObstacle) ~
-          ("moves" -> this.moves)
+      ("grid" -> List(this.grid.height.toString, this.grid.length.toString)) ~
+        ("player" -> List(this.player.coordinate._1, this.player.coordinate._2)) ~
+        ("target" -> List(this.target.coordinate._1, this.target.coordinate._2)) ~
+        ("obstacles" -> tempObstacle) ~
+        ("moves" -> this.moves)
 
     val file = new File(getCurrentDirectory + "/src/levels/" + filename + ".json")
     val bw = new BufferedWriter(new FileWriter(file))

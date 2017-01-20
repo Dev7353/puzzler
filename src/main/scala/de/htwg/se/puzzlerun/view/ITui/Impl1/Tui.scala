@@ -14,7 +14,6 @@ case class Tui(var c: IController) extends Observer with ITui {
   def update = draw()
   val logger = Logger.getLogger(getClass().getName())
 
-
   logger.info("--- Puzzlerun ---")
   logger.info("The awesome labyrinth game!")
 
