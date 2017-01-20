@@ -31,8 +31,6 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
   var grass_img = getCurrentDirectory + "/src/img/grass.png"
   var door_img = getCurrentDirectory + "/src/img/door.png"
 
-  var cb: Component = new RadioButton("Helper")
-
   var current_level = 0
   var fields = Array.ofDim[BoxPanel](c.grid.height, c.grid.length)
 
@@ -100,11 +98,7 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
       background = java.awt.Color.BLACK
     }
 
-    def cb_area = new BoxPanel(Orientation.Horizontal) {
-      contents += cb
-    }
     add(directions, Center)
-    add(cb_area, South)
   }
 
   contents = new BorderPanel {
