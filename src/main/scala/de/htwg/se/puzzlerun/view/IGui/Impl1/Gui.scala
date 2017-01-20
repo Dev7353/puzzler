@@ -111,7 +111,6 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
   listenTo(btn_up)
   listenTo(btn_left)
   listenTo(btn_right)
-  listenTo(cb)
 
   listenTo(grid.keys)
 
@@ -137,7 +136,7 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
         btn_left.text = "Left " + c.moves.get("Left").get
         if (c.moves.get("Left").get == 0)
           btn_left.enabled = false
-      } else if (b.text.equals("Helper"))
+      }
 
         if (c.state.equals("Target reached")) {
           Dialog.showMessage(contents.head, "Congrats Pal :)", title = "")
@@ -146,7 +145,9 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
           sys.exit()
         } else if (c.state.equals("Moves depleted")) {
           Dialog.showMessage(contents.head, "No more moves left!", title = "LOSER!")
+          sys.exit()
         }
+      print("Button state " + c.state)
 
   }
   resizable = true
@@ -195,13 +196,24 @@ class Gui(var c: IController) extends MainFrame with Observer with IGui {
           icon = new ImageIcon(getImage(player_img))
         }
       }
-      if (c.grid.getCell(row, col).toString.equals("-")) {
+      else if (c.grid.getCell(row, col).toString.equals("-")) {
         fields(row)(col).contents.clear()
         fields(row)(col).contents += new Label("") {
           icon = new ImageIcon(grass_img)
         }
       }
-
+      else if (c.grid.getCell(row, col).toString.equals("X")) {
+        fields(row)(col).contents.clear()
+        fields(row)(col).contents += new Label("") {
+          icon = new ImageIcon(getImage(door_img))
+        }
+      }
+      else if (c.grid.getCell(row, col).toString.equals("X")) {
+        fields(row)(col).contents.clear()
+        fields(row)(col).contents += new Label("") {
+          icon = new ImageIcon(obstacle_img)
+        }
+      }
       fields(row)(col).repaint
       fields(row)(col).revalidate()
     }
